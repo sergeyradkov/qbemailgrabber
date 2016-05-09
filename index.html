@@ -1,114 +1,18 @@
 <html ng-app="QB_Project">
-    
 <head>
-    <meta charset="UTF-8">
-    <title>Linking to UI Router</title>
-    
-    
-    
-    
+	<title></title>
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
 </head>
-<body ng-app="Gym Registration I/O Screen">
-    <ui-view></ui-view>
-    
-    <div class="container" ng-controller="CustController as vm">
-        
-        <div class="panel QB heading">
-            <h3>Gym Registration Data Reader Updater</h3>
-       
-	   
-	    <div ng-controller="Milestokm as kmc">
-        <h1>{{kmc.message}}</h1>
-        <input type="First Name" ng-model="kmc.fname" placeholder="Enter FirstName">
-        <button ng-click="kmc.fname(kmc.fname)">Confirm to First Name</button>
-      
-        <br>
-        <input type="Last Name" ng-model="kmc.lname" placeholder="Enter Last Name">
-        <button ng-click="kmc.lname(kmc.lanme)">Confirm Last Name</button>
-        </br>
-		
-		<br>
-        <input type="Email Address" ng-model="kmc.email" placeholder="Enter Email Addres">
-        <button ng-click="kmc.email(kmc.email)">Confirm Email Address</button>
-        </br>
-		
-		
-        <input type="Line 1 Address" ng-model="kmc.addrLine1" placeholder="Enter Line 1 Addres">
-        <button ng-click="kmc.addrLine1(kmc.addrLine1)">Confirm Line 1 Address</button>
-        
-        <input type="Line 2 Address" ng-model="kmc.addrLine2" placeholder="Enter Line 2 Addres">
-        <button ng-click="kmc.addrLine2(kmc.addrLine2)">Confirm Line 2 Address</button>
-        		
-		<br>
-        <input type="Main Phone Number" ng-model="kmc.mainPhone" placeholder="Enter Main Phone Number">
-        <button ng-click="kmc.mainPhone(kmc.mainPhone)">Confirm Main Phone Number</button>
-        </br>
-		
-		<br>
-        <input type="Date Of Birth" ng-model="kmc.dob" placeholder="Enter Date of Birth">
-        <button ng-click="kmc.addrLine1(kmc.dob)">Confirm Date of Birth</button>
-        </br>
-    </div>
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	    </div>
-        <nav class="navbar navbar-elements">
-				<div class="container-fluid">
-					<span class="navbar-elements">Customer: </span>
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#" ng-click="vm.clearCompleted($event)">Clear Completed</a></li>
-					</ul>
-				</div>
-			</nav>
-        
-        
-    </div>
-   
-   
-    <!--<div class="container" ng-controller="taskController as vm">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<form class="form-inline">
-						<div class="form-group" style="width: 90%;">
-							<input type="text" class="form-control input-lg" style="width: 95%;" id="task" ng-model="vm.newTask" placeholder="What needs to be done?">
-						</div>
-						<button ng-click="vm.addTask()" class="btn btn-primary">Add</button>
-					</form>
-				</div>
-				<div class="panel-body">
-					<div class="list-group">
-						<button ng-repeat="task in vm.tasks track by $index" type="button" ng-click="vm.completeTask(task)" class="list-group-item">
-							<span class="lead" ng-if="!task.isDone">{{ task.description }}</span>
-							<s class="lead" ng-if="task.isDone">{{ task.description }}</s>
-						</button>
-					</div>
-				</div>
-			</div>
-			<nav class="navbar navbar-default">
-				<div class="container-fluid">
-					<span class="navbar-brand">Completed: {{ vm.completed }}, Remaining: {{ vm.tasks.length - vm.completed }}</span>
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#" ng-click="vm.clearCompleted($event)">Clear Completed</a></li>
-					</ul>
-				</div>
-			</nav>
-    -->
-    
-    
-    
-    
-     <script src="bower_components/angular/angular.js"></script>
-       <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-    
-    <script src="app/app.js"></script>
-    <script src="controllers.js"></script>
-    <script src="app/router.js"></script>
-   {{3+3}} 
+<body>
+	
+	
+	<ui-view></ui-view>
+	
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+	<script src="app/app.js"></script>
+	<script src="app/router.js"></script>
+	
+	<script src="app/views/customer-controller.js"></script>
 </body>
 </html>

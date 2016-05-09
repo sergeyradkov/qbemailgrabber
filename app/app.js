@@ -1,1 +1,3 @@
-var app=angular.module("QB_Project",["ui.router"])
+angular.module("QB_Project",[
+    'ui.router'
+    ])
