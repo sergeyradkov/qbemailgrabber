@@ -1,0 +1,51 @@
+
+
+<h1>Hello {{mc.newPerson.name || 'New Member'}}</h1>
+<div class="row">
+    <div class="col-xs-6 col-xs-offset-3">
+        <div class="sub-container">
+            <div class="panel-body">    
+                <form class="form" ng-submit="cc.addPerson(cc.newPerson)">
+                    <input placeholder="Company" type="text" class="form-control" ng-model="cc.newPerson.company">
+                    <input placeholder="Customer ID" type="text" class="form-control" ng-model="cc.newPerson.id">
+                    <input placeholder="Name" type="text" class="form-control" ng-model="cc.newPerson.name">
+                    <input placeholder="Email" type="email" class="form-control" ng-model="cc.newPerson.email">
+                    <input placeholder="Field 1" type="text" class="form-control" ng-model="cc.newPerson.field1">
+                    <input placeholder="Field 2" type="text" class="form-control" ng-model="cc.newPerson.field2">
+                    <button class="btn btn-success center-block" type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="container">
+    <div class="row" style="text-align: center">
+        <div class="list-panel" ng-repeat="person in cc.list">
+            <div class="panel-body list">
+                <div class="col-sm-2">
+                    <p>{{person.company}}</p>
+                </div>
+                <div class="col-sm-2">
+                    <p>{{person.id}}</p>
+                </div>
+                <div class="col-sm-2">
+                    <p>{{person.name}}</p>
+                </div>
+                <div class="col-sm-2">
+                    <p>{{person.email}}</p>
+                </div>
+                <div class="col-sm-2">
+                    <p>{{person.field1}}</p>
+                </div>
+                <div class="col-sm-2">
+                    <button class="btn btn-small btn-danger" ng-click="cc.removePerson($index)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Remove</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

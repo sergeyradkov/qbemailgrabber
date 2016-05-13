@@ -1,0 +1,42 @@
+body {
+    background-image: url("https://static.pexels.com/photos/24193/pexels-photo.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: "Segoe UI",Arial,sans-serif;
+    overflow-x:  hidden;
+}
+h1 {
+    font-family: 'Raleway', sans-serif;
+    color: white;
+    text-align: center;
+    font-size: 8.1em;
+    margin-top: 20px;
+}
+.sub-container {
+    padding: 10px 20px 0 20px;
+    background-color: #555;
+    border-radius: 10px;
+    margin: 30px 0;
+    opacity: .85;
+    -webkit-filter: drop-shadow(8px 8px 10px #222);
+    filter: drop-shadow(8px 8px 10px #222);
+} 
+.sub-container:hover {
+    background-color: #333;
+}
+input {
+    margin-bottom: 20px;
+}
+.list {
+    background-color: #555;
+    border-radius: 10px;
+    opacity: .85;
+    padding: 10px;
+    color: white;
+    -webkit-filter: drop-shadow(8px 8px 10px #222);
+    filter: drop-shadow(8px 8px 10px #222);
+    margin-bottom: 20px;
+}
+.list:hover {
+    background-color: #333;
+}
