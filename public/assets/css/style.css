@@ -1,11 +1,11 @@
 body {
-  background: url(../../../public/assets/img/back.jpg) no-repeat center center fixed;
+
+ background-image: url('../../../public/assets/img/back.jpg');
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
   height: 100%;
-  overflow-x:  hidden;
   font-family: 'Raleway', sans-serif;
 }
 
