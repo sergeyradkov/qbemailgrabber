@@ -1,0 +1,19 @@
+{
+  "name": "qbemailgrabber",
+  "version": "1.0.0",
+  "description": "an application to read a QB customer and update email info and customer information.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jpanuska/qbemailgrabber.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jpanuska/qbemailgrabber/issues"
+  },
+  "homepage": "https://github.com/jpanuska/qbemailgrabber#readme"
+}
