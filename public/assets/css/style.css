@@ -1,14 +1,12 @@
 body {
-
- background-image: url('../../../public/assets/img/back.jpg');
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  height: 100%;
-  font-family: 'Raleway', sans-serif;
+    background-image: url("https://static.pexels.com/photos/24193/pexels-photo.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: "Segoe UI",Arial,sans-serif;
+    overflow-x:  hidden;
+    height: 100%;
+    font-family: 'Raleway', sans-serif;
 }
-
 input {
     margin-bottom: 20px;
     padding: 0;
