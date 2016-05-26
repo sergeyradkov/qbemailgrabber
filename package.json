@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/jpanuska/qbemailgrabber/issues"
   },
-  "homepage": "https://github.com/jpanuska/qbemailgrabber#readme"
+  "homepage": "https://github.com/jpanuska/qbemailgrabber#readme",
+  "dependencies": {
+    "express": "^4.13.4",
+    "npm": "^3.9.2"
+  }
 }
