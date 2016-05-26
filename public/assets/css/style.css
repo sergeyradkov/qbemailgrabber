@@ -1,8 +1,10 @@
 body {
-    background-image: url("../../assets/img/back.jpg");
+    background: url(../../public/assets/img/back.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
     background-size: cover;
-    background-attachment: fixed;
-    font-family: "Segoe UI",Arial,sans-serif;
+    height: 100%;
     overflow-x:  hidden;
     font-family: 'Raleway', sans-serif;
 }
