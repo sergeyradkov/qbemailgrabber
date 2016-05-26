@@ -3,7 +3,7 @@ angular.module('QB_Project')
 
     $stateProvider
     .state('customer', {
-        url: '/customer',
+        url: '',
         templateUrl: 'app/views/customer.html',
         controller: 'CustomerController',
         controllerAs: 'cc'
