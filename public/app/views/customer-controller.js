@@ -6,16 +6,12 @@ angular.module('QB_Project')
         cc.list = [];
         
         cc.addPerson = function(newPerson) {
-            
             cc.list.push(newPerson)
             cc.newPerson = {};
-            
         }
         
         cc.removePerson = function(index) {
-            
             cc.list.splice(index, 1);
-            
         }
         
     })

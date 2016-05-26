@@ -1,27 +1,41 @@
-
-
-<h1>Please Provide Info:<br> {{mc.newPerson.name || 'Member'}}</h1>
-<div class="row">
-    <div class="col-xs-6 col-xs-offset-3">
-        <div class="sub-container">
-            <div class="panel-body">    
-                <form class="form" ng-submit="cc.addPerson(cc.newPerson)">
-                    <input placeholder="Company" type="text" class="form-control" ng-model="cc.newPerson.company">
-                    <input placeholder="Customer ID" type="text" class="form-control" ng-model="cc.newPerson.id">
-                    <input placeholder="Name" type="text" class="form-control" ng-model="cc.newPerson.name">
-                    <input placeholder="Email" type="email" class="form-control" ng-model="cc.newPerson.email">
-                    <input placeholder="Field 1" type="text" class="form-control" ng-model="cc.newPerson.field1">
-                    <input placeholder="Field 2" type="text" class="form-control" ng-model="cc.newPerson.field2">
-                    <button class="btn btn-success center-block" type="submit">Submit</button>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12">
+            <div class="panel panel-primary" style="margin-top: 5%">
+                <div class="panel-heading">
+                    <h1>QB email grabber<h1>
+                        <hr></hr>
+                        <h2>Please provide info</h2>
+                </div>
+                <div class="panel-body">
+                <form class="form" ng-submit="cc.addPerson(cc.newCustomer)">
+                   <div class="col-md-6 col-xs-12">
+                    <label for="name">Your name</label>
+                    <input placeholder="Please provide your full name" type="text" class="form-control" ng-model="cc.newCustomer.person">
+                    <label for="name">Company name</label>
+                    <input placeholder="Please provide your company name" type="text" class="form-control" ng-model="cc.newCustomer.company">
+                    </div>
+                   <div class="col-md-6 col-xs-12">
+                    <label for="name">E-mail</label>
+                    <input placeholder="Please provide contact e-mail" type="email" class="form-control" ng-model="cc.newCustomer.email">
+                    <label for="name">Phone number</label>
+                    <input placeholder="Please provide contact phone number" type="text" class="form-control" ng-model="cc.newCustomer.phone">
+                   </div>
+                   <div class="col-md-12 col-xs-12">
+                     <input placeholder="Billing address" type="text" class="form-control" ng-model="cc.newCustomer.billAddress">
+                   </div>
+                    <div class="button-group">
+                          <button type="submit" class="btn btn-success" style="width: 30%">Submit</button>
+                          <button type="reset" class="btn btn-danger" style="width: 30%">Reset</button>
+                     </div>
                 </form>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-
-
-
+<!--
 <div class="container">
     <div class="row" style="text-align: center">
         <div class="list-panel" ng-repeat="person in cc.list">
@@ -48,4 +62,4 @@
 
         </div>
     </div>
-</div>
+</div> -->
