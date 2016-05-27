@@ -1,4 +1,4 @@
-angular.module('QB_Project')
+(function() {angular.module('QB_Project')
     .controller('CustomerController', function ($scope, recaptchaService) {
 
         var cc = this;
@@ -17,12 +17,12 @@ angular.module('QB_Project')
                 $scope.error = "Please Verify you are not a robot";
             }
         }
-    })
+    });
+})();
 
-    .service('recaptchaService', function ($http) {
+(function() {angular.module('QB_Project').service('recaptchaService', function ($http) {
         return {
             sendForm: function (item) {
-                console.log(item);
                 return $http({
                     method: 'POST',
                     url: '/',
@@ -31,3 +31,4 @@ angular.module('QB_Project')
             }
         }
     });
+})();
