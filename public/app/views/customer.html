@@ -1,14 +1,14 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12">
-            <div class="panel panel-primary" style="margin-top: 5%">
+            <div class="panel panel-primary" style="margin-top: 3%">
                 <div class="panel-heading">
                     <h1>QB email grabber<h1>
                         <hr></hr>
                         <h2>Please provide info</h2>
                 </div>
                 <div class="panel-body">
-                <form class="form" ng-submit="cc.addPerson(cc.newCustomer)">
+                <form class="form" ng-submit="cc.addCustomer(cc.newCustomer)">
                 
                 <div class="form-group col-md-6 col-xs-12">
                     <label for="name">Your name</label>
@@ -18,9 +18,9 @@
                 </div>
                 <div class="form-group col-md-6 col-xs-12">
                     <label for="name">E-mail</label>
-                    <input placeholder="Please provide contact e-mail" type="email" class="form-control" ng-model="cc.newCustomer.email">
+                    <input placeholder="Please provide contact e-mail" type="email" class="form-control" ng-model="cc.newCustomer.email" required>
                     <label for="name">Phone number</label>
-                    <input placeholder="Please provide contact phone number" type="text" class="form-control" ng-model="cc.newCustomer.phone">
+                    <input placeholder="Please provide contact phone number" type="text" class="form-control" ng-model="cc.newCustomer.phone" required>
                 </div>
                 <div class="form-group">
                     <label for="name">Billing address</label>
