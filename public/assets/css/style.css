@@ -1,5 +1,5 @@
 body {
-    background-image: url("https://newevolutiondesigns.com/images/freebies/google-material-design-wallpaper-2.jpg");
+    background-image: url(../../assets/img/back.jpg);
     background-size: cover;
     background-attachment: fixed;
     overflow-x:  hidden;
@@ -15,32 +15,3 @@ input {
     box-shadow: 0 0 10px rgba(0,0,0,0.5); /* Параметры тени */
     padding: 2px;
 }
-
-
-
-
-
-/*
-.list {
-    background-color: #555;
-    border-radius: 10px;
-    opacity: .85;
-    padding: 10px;
-    color: white;
-    -webkit-filter: drop-shadow(8px 8px 10px #222);
-    filter: drop-shadow(8px 8px 10px #222);
-    margin-bottom: 20px;
-}
-.list:hover {
-    background-color: #333;
-}.sub-container {
-    padding: 10px 20px 0 20px;
-    background-color: #555;
-    border-radius: 10px;
-    margin: 30px 0;
-    opacity: .85;
-    -webkit-filter: drop-shadow(8px 8px 10px #222);
-    filter: drop-shadow(8px 8px 10px #222);
-} 
-.sub-container:hover {
-    background-color: #333;*/
