@@ -7,11 +7,16 @@ body {
     font-family: 'Raleway', sans-serif;
 }
 
-input, button {
-    margin-top: 20px;
+label {
+    margin: 10px 0;
     padding: 0;
 }
+
+textarea {
+    margin: 0 15px;
+}
+
 .panel {
-    box-shadow: 0 0 10px rgba(0,0,0,0.5); /* Параметры тени */
-    padding: 2px;
+    box-shadow: 10px 0 10px rgba(0,0,0,0.5);
+    padding: 3px;
 }
