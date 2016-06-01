@@ -14,6 +14,8 @@
     "npm": "^3.9.2",
     "body-parser": "^1.15.1",
     "request": "^2.72.0",
-    "node-quickbooks": "^2.0.8"
+    "node-quickbooks": "^2.0.8",
+    "express-session": "^1.13.0",
+    "ejs": "^2.4.2"
   }
 }
