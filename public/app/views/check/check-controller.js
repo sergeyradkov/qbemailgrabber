@@ -7,7 +7,7 @@
             //calls the server
             //then
             
-            $state.go('update', {id: foundMember.id})
+            $state.go('update', {id: /*foundMember.id*/mobile})
         }
 
     });
