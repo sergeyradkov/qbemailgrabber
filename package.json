@@ -8,6 +8,11 @@
   },
   "author": "Jay and Sergey",
   "license": "ISC",
+    "keywords": [
+    "Intuit",
+    "QuickBooks",
+    "Intuit Developer"
+  ],
 
   "dependencies": {
     "express": "^4.13.4",
