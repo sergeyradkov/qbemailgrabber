@@ -5,9 +5,9 @@
     
    <div class="col-md-8 col-md-offset-2">
     <div class="input-group input-group-lg">
-      <input type="text" class="form-control" placeholder="Search for...">
+      <input type="text" class="form-control" placeholder="Search for..." ng-model="$ctrl.num">
       <span class="input-group-btn">
-        <button class="btn btn-primary" type="button"> Check your number!</button>
+        <button class="btn btn-primary" type="button" ng-click="$ctrl.find($ctrl.num)"> Check your number!</button>
       </span>
     </div><!-- /input-group -->
   </div><!-- /.col-lg-6 -->

@@ -9,7 +9,7 @@ angular.module('QB_Project')
         controllerAs: 'ch'
     })
     .state('customer', {
-        url: '/update',
+        url: '/update/:id',
         templateUrl: 'app/views/customer/customer.html',
         controller: 'CustomerController',
         controllerAs: 'cc'
