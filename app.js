@@ -8,7 +8,7 @@ var http         = require('http'),
     util         = require('util'),
     cookieParser = require('cookie-parser'),
     session      = require('express-session'),
-  //  QuickBooks   = require('/public/index')
+    QuickBooks   = require('./index')
     captchaUrl ='https://www.google.com/recaptcha/api/siteverify?secret=6LeWCCETAAAAAGtTk0MKqtHyPEyNZtfRpqND-uV1&response=';
 
 
