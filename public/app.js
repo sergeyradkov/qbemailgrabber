@@ -1,27 +1,54 @@
-var http       = require('http'),
-    port       = process.env.PORT || 3000,
-    request    = require('request'),
-    qs         = require('querystring'),
-    util       = require('util'),
-    bodyParser = require('body-parser'),
+var app          = express(),
+    http         = require('http'),
+    express      = require('express'),
+    port         = process.env.PORT || 3000;
+    request      = require('request'),
+    bodyParser   = require('body-parser'),
+    qs           = require('querystring'),
+    util         = require('util'),
     cookieParser = require('cookie-parser'),
-    session    = require('express-session'),
-    express    = require('express'),
-    app        = express(),
-    QuickBooks = require('../index')
+    session      = require('express-session'),
+    QuickBooks   = require('../index')
+    captchaUrl ='https://www.google.com/recaptcha/api/siteverify?secret=6LeWCCETAAAAAGtTk0MKqtHyPEyNZtfRpqND-uV1&response=';
 
 
-// Generic Express config
-app.set('port', port)
-app.set('views', 'views')
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}))
-app.use(cookieParser('brad'))
-app.use(session({resave: false, saveUninitialized: false, secret: 'smith'}));
+// GENERIC EXPRESS CONFIG
+    app.use(express.static(__dirname + '/public'));
+    app.set('port', port)
+    app.set('views', 'views')
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({extended: true}))
+    app.use(cookieParser('brad'))
+    app.use(session({resave: false, saveUninitialized: false, secret: 'smith'}));
+    
+    app.listen(port, function(){
+    console.log('Express server listening on port ' + app.get('port'))
+    });
 
-app.listen(app.get('port'), function() {
-  console.log('Express server listening on port ' + app.get('port'))
-})
+
+// THE CAPTURE VERIFICATION PART
+
+app.post('/', function(req, res){
+  checkCaptcha(req.body.captchaResponse, function(response){
+    console.log(response.success);
+  if(response.success){
+    res.send("WOOT! you are not a robot");
+  } else {
+    res.send("BAD! you are a robot");
+  }
+  });
+});
+
+var checkCaptcha = function(captchaResponse, cb){
+  request.get(captchaUrl + captchaResponse, function(err, response, body){
+    if(err){
+      console.log("error: ", err);
+    } else {
+      console.log(body);
+      return cb(JSON.parse(body));
+    }
+  });
+};
 
 // INSERT YOUR CONSUMER_KEY AND CONSUMER_SECRET HERE
 

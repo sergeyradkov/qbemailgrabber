@@ -2,9 +2,9 @@
   "name": "qbhelper",
   "version": "1.0.0",
   "description": "an application to read a QB customer and update email info and customer information.",
-  "main": "index.js",
+  "main": "public/app.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index/app.js"
   },
   "author": "Jay and Sergey",
   "license": "ISC",
