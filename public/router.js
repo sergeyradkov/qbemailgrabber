@@ -1,3 +1,5 @@
+(function(){angular.module("qbhelper",['ui.router'])}());
+
 angular.module("qbhelper")
     .config(function ($stateProvider) {
 
