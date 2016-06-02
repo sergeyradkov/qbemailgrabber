@@ -16,3 +16,7 @@ label {
     box-shadow: 10px 0 10px rgba(0,0,0,0.5);
     padding: 3px;
 }
+.jumbotron{
+    margin-top: 10%;
+    padding-bottom: 5%;
+}

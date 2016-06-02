@@ -4,7 +4,7 @@ angular.module('QB_Project')
     $stateProvider
     .state('check', {
         url: '',
-        templateUrl:'app/views/check/checkemail.html',
+        templateUrl:'app/views/check/check.html',
         controller: 'CheckController',
         controllerAs: 'ch'
     })
