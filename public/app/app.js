@@ -1,3 +1,1 @@
-angular.module("QB_Project",[
-    'ui.router'
-    ])
+(function(){angular.module("qbhelper",['ui.router'])}());

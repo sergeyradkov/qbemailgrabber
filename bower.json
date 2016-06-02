@@ -1,19 +1,12 @@
 {
-  "name": "QB-Project1",
-  "homepage": "https://github.com/nateday/QB-Project1",
+  "name": "QB Helper",
+  "homepage": "https://github.com/jpanuska/qbemailgrabber.git",
   "authors": [
-    "nathan"
+    "Jay and Sergey"
   ],
   "description": "",
-  "main": "",
+  "main": "public/index.html",
   "license": "MIT",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
   "dependencies": {
     "angular": "^1.5.5",
     "angular-ui-router": "^0.2.18",
