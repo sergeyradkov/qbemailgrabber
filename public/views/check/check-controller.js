@@ -1,4 +1,4 @@
-(function() {angular.module('QB_Project')
+(function() {angular.module("qbhelper")
     .controller('CheckController', function ($scope, $state) {
 
         var ch = this;
@@ -7,7 +7,7 @@
             //calls the server
             //then
             
-            $state.go('update', {id: foundMember.id})
+            $state.go('update', {id:foundMember.id})
         }
 
     });

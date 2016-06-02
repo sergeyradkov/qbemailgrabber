@@ -1,4 +1,4 @@
-(function() {angular.module('QB_Project')
+(function() {angular.module("qbhelper")
     .controller('CustomerController', function ($scope, recaptchaService) {
 
         var cc = this;
@@ -20,7 +20,7 @@
     });
 })();
 
-(function() {angular.module('QB_Project').service('recaptchaService', function ($http) {
+(function() {angular.module("qbhelper").service('recaptchaService', function ($http) {
         return {
             sendForm: function (item) {
                 return $http({
