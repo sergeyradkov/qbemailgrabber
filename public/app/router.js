@@ -1,4 +1,4 @@
-angular.module('QB_Project')
+angular.module("qbhelper")
     .config(function ($stateProvider) {
 
     $stateProvider

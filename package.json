@@ -1,5 +1,5 @@
 {
-  "name": "qbemailgrabber",
+  "name": "qbhelper",
   "version": "1.0.0",
   "description": "an application to read a QB customer and update email info and customer information.",
   "main": "index.js",
