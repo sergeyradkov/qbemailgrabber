@@ -1,6 +1,6 @@
-var app          = express(),
-    http         = require('http'),
+var http         = require('http'),
     express      = require('express'),
+    app          = express(),
     port         = process.env.PORT || 8080;
     request      = require('request'),
     bodyParser   = require('body-parser'),
@@ -8,7 +8,7 @@ var app          = express(),
     util         = require('util'),
     cookieParser = require('cookie-parser'),
     session      = require('express-session'),
-    QuickBooks   = require('../index')
+  //  QuickBooks   = require('/public/index')
     captchaUrl ='https://www.google.com/recaptcha/api/siteverify?secret=6LeWCCETAAAAAGtTk0MKqtHyPEyNZtfRpqND-uV1&response=';
 
 
