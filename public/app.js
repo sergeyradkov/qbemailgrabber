@@ -50,6 +50,7 @@ var checkCaptcha = function(captchaResponse, cb){
   });
 };
 
+/*
 // INSERT YOUR CONSUMER_KEY AND CONSUMER_SECRET HERE
 
 var consumerKey    = 'qyprdTjD18ZhGt5PwnU2jvy6lMn69O',
@@ -129,5 +130,5 @@ app.get('/callback', function(req, res) {
     
   })
   // res.send('<!DOCTYPE html><html tlang="en"><head></head><body><script>window.opener.location.reload(); window.close();</script></body></html>')
-})
+}) */
 
