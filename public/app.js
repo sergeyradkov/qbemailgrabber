@@ -1,7 +1,7 @@
 var app          = express(),
     http         = require('http'),
     express      = require('express'),
-    port         = process.env.PORT || 3000;
+    port         = process.env.PORT || 8080;
     request      = require('request'),
     bodyParser   = require('body-parser'),
     qs           = require('querystring'),

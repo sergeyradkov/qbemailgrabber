@@ -4,7 +4,7 @@
   "description": "an application to read a QB customer and update email info and customer information.",
   "main": "public/app.js",
   "scripts": {
-    "start": "node index/app.js"
+    "start": "node public/app.js"
   },
   "author": "Jay and Sergey",
   "license": "ISC",
