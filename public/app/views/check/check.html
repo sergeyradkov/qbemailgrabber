@@ -1,16 +1,18 @@
 <div class="container">
     <div class="jumbotron text-center">
     <h1>Hello, how are you?!</h1>
-    <p>Could you please provide your mobile phone number, we would like to who we are talking to </p>
+    <p>Could you please provide your business phone number, we would like to know who we are talking to </p>
     
+   <!-- Asking a mobile number for verification--> 
+   
    <div class="col-md-8 col-md-offset-2">
     <div class="input-group input-group-lg">
-      <input type="text" class="form-control" placeholder="Search for..." ng-model="$ctrl.num">
+      <input type="text" class="form-control" placeholder="like 2081234567" ng-model="$ctrl.num">
       <span class="input-group-btn">
         <button class="btn btn-primary" type="button" ng-click="$ctrl.find($ctrl.num)"> Check your number!</button>
       </span>
     </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
+  </div><!-- /.col-md-8 -->
 
  </div>
 </div>
