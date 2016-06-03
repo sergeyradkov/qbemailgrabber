@@ -1,18 +1,23 @@
 <div class="container">
-    <div class="jumbotron jumbotron-primary text-center">
-    <h1>Welcome to the Customer Updater!</h1> <br> <h2>"Name Nabber"</h2>
+  <div class="jumbotron jumbotron-primary text-center">
+    <h1>Welcome to the Customer Updater!</h1> <br>
+    <h2>"Name Nabber"</h2>
     <p>Let us find you and verify or add your email address. Please enter your phone number below: </p>
-    
-   <!-- Asking for a phone number for verification--> 
-   
-   <div class="col-md-8 col-md-offset-2">
-    <div class="input-group input-group-lg">
-      <input type="text" class="form-control" placeholder="like 2081234567" ng-model="$ctrl.num">
-      <span class="input-group-btn">
-        <button class="btn btn-primary" type="button" ng-click="$ctrl.find($ctrl.num)"> Check your number!</button>
-      </span>
-    </div><!-- /input-group -->
-  </div><!-- /.col-md-8 -->
 
- </div>
+    <!-- Asking for a phone number for verification-->
+
+    <div class="col-md-8 col-md-offset-2">
+      <form ng-submit="ch.find(ch.phoneNumber)">
+        <div class="input-group input-group-lg">
+          <input class="form-control" ng-model="ch.phoneNumber" ng-keyUp="ch.formatPhoneNumber(ch.phoneNumber)" minlength="10" maxlength="10"/>
+          <span class="input-group-btn">
+            <button class="btn btn-primary" type="submit"> Check your number!</button>
+          </span>
+        </div>
+        <!-- /input-group -->
+      </form>
+    </div>
+    <!-- /.col-md-8 -->
+
+  </div>
 </div>

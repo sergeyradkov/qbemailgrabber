@@ -1,8 +1,19 @@
-(function() {angular.module("qbhelper")
-    .controller('CustomerController', function ($scope, recaptchaService) {
-
+(function () {
+    angular.module("qbhelper")
+    .controller('CustomerController', function ($scope, $state, MemberService, recaptchaService) {
         var cc = this;
         cc.updatedCustomer = {};
+
+        MemberService.findCustomerById($state.params.id).then(function (res) {
+            //auto formats phone number
+            res.data.customer.phoneNumber = MemberService.formatPhoneNumber(res.data.customer.phoneNumber)
+            cc.currentCustomer = res.data.customer
+        })
+
+        this.formatPhoneNumber = function (tel) {
+            cc.currentCustomer.phoneNumber = MemberService.formatPhoneNumber(tel)
+        }
+
 
         cc.addCustomer = function (customer) {
             cc.updatedCustomer = customer;
@@ -20,7 +31,8 @@
     });
 })();
 
-(function() {angular.module("qbhelper").service('recaptchaService', function ($http) {
+(function () {
+    angular.module("qbhelper").service('recaptchaService', function ($http) {
         return {
             sendForm: function (item) {
                 return $http({

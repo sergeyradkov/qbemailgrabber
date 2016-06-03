@@ -8,23 +8,23 @@
                         <h2>Here is your customer information to verify:</h2>
                 </div>
             <div class="panel-body">
-                <form class="form" ng-submit="cc.addCustomer(cc.newCustomer)">
+                <form class="form" ng-submit="cc.addCustomer(cc.currentCustomer)">
                 
                 <div class="form-group col-md-6 col-xs-12">
                     <label for="name">Customer name</label>
-                    <input placeholder="Your Customer Name Here" type="text" class="form-control" ng-model="cc.newCustomer.person">
+                    <input placeholder="Your Customer Name Here" type="text" class="form-control" ng-model="cc.currentCustomer.displayName">
                     <label for="name">Company Name</label>
-                    <input placeholder="Please provide your company name, leave blank if no company." type="text" class="form-control" ng-model="cc.newCustomer.company">
+                    <input placeholder="Please provide your company name, leave blank if no company." type="text" class="form-control" ng-model="cc.currentCustomer.company">
                 </div>
                 <div class="form-group col-md-6 col-xs-12">
                     <label for="name">E-mail</label>
-                    <input placeholder="Please provide contact e-mail, or update the one we have." type="email" class="form-control" ng-model="cc.newCustomer.email" required>
+                    <input placeholder="Please provide contact e-mail, or update the one we have." type="email" class="form-control" ng-model="cc.currentCustomer.email" required>
                     <label for="name">Phone number</label>
-                    <input placeholder="Please provide contact phone number, 10 mumeric digits only." type="tel" class="form-control" ng-model="cc.newCustomer.phone" required>
+                    <input placeholder="Please provide contact phone number, 10 mumeric digits only." ng-keyup="cc.formatPhoneNumber(cc.currentCustomer.phoneNumber)" type="tel" class="form-control" ng-model="cc.currentCustomer.phoneNumber" required>
                 </div>
                 <div class="form-group col-md-12 col-xs-12">
                     <label for="address">Billing address</label>
-                    <textarea rows="3" placeholder="Please provide company billing address" type="text" class="form-control" ng-model="cc.newCustomer.billAddress"></textarea>
+                    <textarea rows="3" placeholder="Please provide company billing address" type="text" class="form-control" ng-model="cc.currentCustomer.billAddress"></textarea>
                 </div>    
                 <div class="col-md-6 col-xs-12">
                     <div data-size="normal" class="g-recaptcha" data-sitekey="6LeWCCETAAAAAO___dCNPAm95cXfrf9CBukxkMVi"></div>

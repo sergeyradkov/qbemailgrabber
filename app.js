@@ -21,10 +21,18 @@ var http         = require('http'),
     app.use(cookieParser('brad'))
     app.use(session({resave: false, saveUninitialized: false, secret: 'smith'}));
     
-    app.listen(port, function(){
-    console.log('Express server listening on port ' + app.get('port'))
-    });
 
+app.get('/lookup', function(req, res){
+  
+  console.log('did I get a phone number?', req.query.phoneNumber)
+  res.send({member: {id: 123456789, displayName: 'My Fake Member'}})
+  
+})
+
+app.get('/customer', function(req, res){
+  console.log('did I get a customer Id?', req.query.id)
+  res.send({customer: {id: 123456789, displayName: 'My Fake Member', phoneNumber: 1234567890}})
+})
 
 // THE CAPTURE VERIFICATION PART
 
@@ -50,6 +58,9 @@ var checkCaptcha = function(captchaResponse, cb){
   });
 };
 
+app.listen(port, function(){
+  console.log('Express server listening on port ' + app.get('port'))
+});
 /*
 // INSERT YOUR CONSUMER_KEY AND CONSUMER_SECRET HERE
 
