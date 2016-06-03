@@ -5,22 +5,22 @@
                 <div class="panel-heading">
                     <h1>QB form helper<h1>
                         <hr></hr>
-                        <h2>Please provide info</h2>
+                        <h2>Here is your customer information to verify:</h2>
                 </div>
             <div class="panel-body">
                 <form class="form" ng-submit="cc.addCustomer(cc.newCustomer)">
                 
                 <div class="form-group col-md-6 col-xs-12">
-                    <label for="name">Your name</label>
-                    <input placeholder="Please provide your full name" type="text" class="form-control" ng-model="cc.newCustomer.person">
-                    <label for="name">Company name</label>
-                    <input placeholder="Please provide your company name" type="text" class="form-control" ng-model="cc.newCustomer.company">
+                    <label for="name">Customer name</label>
+                    <input placeholder="Your Customer Name Here" type="text" class="form-control" ng-model="cc.newCustomer.person">
+                    <label for="name">Company Name</label>
+                    <input placeholder="Please provide your company name, leave blank if no company." type="text" class="form-control" ng-model="cc.newCustomer.company">
                 </div>
                 <div class="form-group col-md-6 col-xs-12">
                     <label for="name">E-mail</label>
-                    <input placeholder="Please provide contact e-mail" type="email" class="form-control" ng-model="cc.newCustomer.email" required>
+                    <input placeholder="Please provide contact e-mail, or update the one we have." type="email" class="form-control" ng-model="cc.newCustomer.email" required>
                     <label for="name">Phone number</label>
-                    <input placeholder="Please provide contact phone number" type="tel" class="form-control" ng-model="cc.newCustomer.phone" required>
+                    <input placeholder="Please provide contact phone number, 10 mumeric digits only." type="tel" class="form-control" ng-model="cc.newCustomer.phone" required>
                 </div>
                 <div class="form-group col-md-12 col-xs-12">
                     <label for="address">Billing address</label>
