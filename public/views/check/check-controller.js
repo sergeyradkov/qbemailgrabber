@@ -3,11 +3,10 @@
         .controller('CheckController', function ($scope, $state, MemberService) {
 
             var ch = this;
-            var $ctrl = this;
             
-            this.formatPhoneNumber = function (tel) {
+            ch.formatPhoneNumber = function (phoneNumber) {
                 debugger
-                $ctrl.phoneNumber = MemberService.formatPhoneNumber(tel)
+                ch.phoneNumber = MemberService.formatPhoneNumber(phoneNumber)
             }
 
             function handleServerSuccess(res) {
