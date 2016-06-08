@@ -1,5 +1,4 @@
-(function () {
-    angular.module("qbhelper")
+(function () {angular.module("qbhelper")
         .controller('CheckController', function ($scope, $state, MemberService, PhoneService) {
 
             var ch = this;
@@ -17,12 +16,10 @@
             }
 
             ch.find = function (phoneNumber) {
-
                 MemberService.findMemberByPhone(phoneNumber).then(handleServerSuccess, handleServerError)
                 //get customer from number 
                 //calls the server
                 //then
-
             }
 
         });
