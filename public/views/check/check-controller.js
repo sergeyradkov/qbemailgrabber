@@ -5,7 +5,6 @@
             var ch = this;
             
             ch.formatPhoneNumber = function (phoneNumber) {
-
                 ch.phoneNumber = PhoneService.formatPhoneNumber(phoneNumber)
             }
 
