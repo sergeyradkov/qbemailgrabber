@@ -20,7 +20,7 @@
                     <label for="name">E-mail</label>
                     <input placeholder="Please provide contact e-mail, or update the one we have." type="email" class="form-control" ng-model="cc.currentCustomer.email" required>
                     <label for="name">Phone number</label>
-                    <input placeholder="Please provide contact phone number, 10 mumeric digits only." ng-keyup="cc.formatPhoneNumber(cc.currentCustomer.phoneNumber)" type="tel" minlength="10" maxlength="10" class="form-control" ng-model="cc.currentCustomer.phoneNumber" required>
+                    <input placeholder="Please provide contact phone number, 10 mumeric digits only." ng-keyup="cc.formatPhoneNumber(cc.currentCustomer.phoneNumber)" type="text" minlength="10" maxlength="10" class="form-control" ng-model="cc.currentCustomer.phoneNumber" required>
                 </div>
                 <div class="form-group col-md-12 col-xs-12">
                     <label for="address">Billing address</label>

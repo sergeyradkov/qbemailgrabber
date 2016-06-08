@@ -11,7 +11,7 @@ angular.module('qbhelper').service('MemberService', function ($http) {
 
 
     this.formatPhoneNumber = function (tel) {
-        if (!tel) { return ''; }
+       /* if (!tel) { return ''; }*/
 
         var value = tel.toString().trim().replace(/^\+/, '');
 
