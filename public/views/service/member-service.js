@@ -1,4 +1,3 @@
-
 angular.module('qbhelper').service('MemberService', function ($http) {
 
     this.findMemberByPhone = function (mobile) {
