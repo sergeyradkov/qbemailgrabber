@@ -9,6 +9,7 @@
 
             function handleServerSuccess(res) {
               if(res.data) {
+                ch.checked = true;  
                 ch.currentCustomer = res.data;
              //   $state.go('customer', { id: res.data.id })
              } else {
