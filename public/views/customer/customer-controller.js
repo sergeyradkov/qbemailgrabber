@@ -1,23 +1,25 @@
-(function () {
-    angular.module("qbhelper")
-    .controller('CustomerController', function ($scope, $state, MemberService, recaptchaService) {
+(function () {angular.module("qbhelper")
+    .controller('CustomerController', function ($scope, $state, MemberService, PhoneService, recaptchaService) {
         var cc = this;
         cc.updatedCustomer = {};
 
         MemberService.findCustomerById($state.params.id).then(function (res) {
             //auto formats phone number
-            res.data.customer.phoneNumber = MemberService.formatPhoneNumber(res.data.customer.phoneNumber)
+            res.data.customer.phoneNumber = PhoneService.formatPhoneNumber(res.data.customer.phoneNumber)
             cc.currentCustomer = res.data.customer
         })
 
         this.formatPhoneNumber = function (tel) {
-            cc.currentCustomer.phoneNumber = MemberService.formatPhoneNumber(tel)
+            cc.currentCustomer.phoneNumber = PhoneService.formatPhoneNumber(tel)
         }
 
 
-        cc.addCustomer = function (customer) {
+        cc.updateCustomer = function (customer) {
+
             cc.updatedCustomer = customer;
+            
             console.log(cc.updatedCustomer);
+
             if (grecaptcha.getResponse()) {
                 customer.captchaResponse = grecaptcha.getResponse(); //This will add the response string to the object you are sending to your server so you can make your get request server side to verify
                 recaptchaService.sendForm(customer).then(function (response) {
