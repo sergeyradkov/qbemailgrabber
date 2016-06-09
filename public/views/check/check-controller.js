@@ -17,6 +17,7 @@
 
             ch.find = function (phoneNumber) {
                 MemberService.findMemberByPhone(phoneNumber).then(handleServerSuccess, handleServerError)
+                debugger
                 //get customer from number 
                 //calls the server
                 //then
