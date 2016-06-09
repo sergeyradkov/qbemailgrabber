@@ -8,7 +8,8 @@
             }
 
             function handleServerSuccess(res) {
-                $state.go('customer', { id: res.data.member.id })
+              debugger;
+                // $state.go('customer', { id: res.data.member.id })
             }
 
             function handleServerError(err) {
