@@ -8,21 +8,22 @@
             }
 
             function handleServerSuccess(res) {
-              debugger;
-                // $state.go('customer', { id: res.data.member.id })
-            }
+              if(res.data) {
+                ch.currentCustomer = res.data;
+             //   $state.go('customer', { id: res.data.id })
+             } else {
+                 console.log(" ERROR ")
+            }}
 
             function handleServerError(err) {
 
             }
 
             ch.find = function (phoneNumber) {
-                MemberService.findMemberByPhone(phoneNumber).then(handleServerSuccess, handleServerError)
-                debugger
-                //get customer from number 
-                //calls the server
-                //then
-            }
+                var normalNumber = phoneNumber;//.replace (/[^\d]/g, "");
+                MemberService.findMemberByPhone(normalNumber).then(handleServerSuccess, handleServerError);
+
+            };
 
         });
 })();

@@ -1,6 +1,7 @@
 angular.module('qbhelper').service('MemberService', function ($http) {
 
     this.findMemberByPhone = function (phoneNumber) {
+        
         return $http.get('/lookup?phoneNumber=' + phoneNumber)
     }
 

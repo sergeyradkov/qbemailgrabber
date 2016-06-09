@@ -1,7 +1,7 @@
 (function () {angular.module("qbhelper")
     .controller('CustomerController', function ($scope, $state, MemberService, PhoneService, recaptchaService) {
         var cc = this;
-        cc.updatedCustomer = {};
+        cc.foundCustomer = {};
 
         MemberService.findCustomerById($state.params.id).then(function (res) {
             //auto formats phone number
