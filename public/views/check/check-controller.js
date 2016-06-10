@@ -11,9 +11,12 @@
               if(res.data) {
                 ch.checked = true;  
                 ch.currentCustomer = res.data;
+                ch.currentCustomer.phoneNumber = res.data.PrimaryPhone.FreeFormNumber;
+                debugger
              //   $state.go('customer', { id: res.data.id })
              } else {
-                 console.log(" ERROR ")
+                 console.log(" ERROR ");
+                 $('#myModal').modal('show');
             }}
 
             function handleServerError(err) {

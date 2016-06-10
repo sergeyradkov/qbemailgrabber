@@ -10,10 +10,11 @@ angular.module("qbhelper")
         controller: 'CheckController',
         controllerAs: 'ch'
     })
-    .state('check.customer', {
+    
+   /* .state('check.customer', {
         url: '/update/:id',
         templateUrl: '/views/customer/customer.html',
         controller: 'CustomerController',
         controllerAs: 'cc'
-    })
+    }) */
 })

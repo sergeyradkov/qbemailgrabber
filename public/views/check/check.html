@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <div class="row">
+
 
   <div class="jumbotron jumbotron-primary text-center" ng-show="ch.checked != true">
     <h1>Welcome to the Customer Updater!</h1> 
@@ -24,8 +24,8 @@
 
 
 
-
-      <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12" ng-hide="ch.checked == true">
+  <div class="row">
+      <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12" ng-hide="ch.checked == fasle">
         <div class="panel panel-primary" style="margin-top: 3%">
           <div class="panel-heading">
             <h1>QB Email Nabber
@@ -47,9 +47,7 @@
                 <input placeholder="Please provide contact e-mail, or update the one we have." type="email" class="form-control" ng-model="ch.currentCustomer.email"
                   required>
                 <label for="name">Phone number</label>
-                <input placeholder="Please provide contact phone number, 10 mumeric digits only." ng-keyup="ch.formatPhoneNumber(ch.currentCustomer.phoneNumber)"
-                  type="text" minlength="10" maxlength="10" class="form-control" ng-model="ch.currentCustomer.phoneNumber"
-                  required>
+                <input  type="text" minlength="10" maxlength="10" class="form-control" ng-model="ch.currentCustomer.phoneNumber" required>
               </div>
               <div class="form-group col-md-12 col-xs-12">
                 <label for="address">Billing address</label>
@@ -66,8 +64,28 @@
           </div>
         </div>
       </div>
+  </div>
 
 
+<!-- Modal -->
+    <div id="myModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header bg-primary">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h3 class="modal-title">Phone Verithication</h3>
+      </div>
+      <div class="modal-body">
+        <h4>Sorry, but we do not know this phone number. Please, try again..</h4>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
 
   </div>
+</div>
+
 </div>
