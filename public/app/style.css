@@ -20,5 +20,11 @@ label {
 }
 .jumbotron{
     margin-top: 10%;
-    padding-bottom: 5%;
+    padding-bottom: 10%;
+}
+.g-recaptcha{
+    margin-top: 15%;
+}
+.btn.btn-success.pull-right{
+    margin-top: 7%;
 }

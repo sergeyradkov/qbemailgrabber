@@ -21,22 +21,19 @@
     </div>
   </div>
 
-
+  <!-- Customer form updater-->
 
   <div class="row">
     <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12" ng-hide="ch.checked == fasle">
       <div class="panel panel-primary" style="margin-top: 3%">
         <div class="panel-heading">
-          <h1>QB Email Nabber
-            <h1>
-              <hr></hr>
-              <h2>Here is your customer information to verify:</h2>
+          <h1>QB Email Nabber</h1>
+          <hr></hr>
+          <h2>Here is your customer information to verify:</h2>
         </div>
         <div class="panel-body">
           <form class="form" ng-submit="ch.updateCustomer(ch.currentCustomer)">
-
             <div class="form-group col-md-6 col-xs-12">
-
               <label for="name">Given Name</label>
               <input placeholder="Your Customer Name Here" type="text" class="form-control" ng-model="ch.currentCustomer.GivenName">
               <label for="name">Family Name</label>
@@ -47,30 +44,21 @@
               <label for="name">Phone number</label>
               <input type="text" minlength="10" maxlength="10" class="form-control" ng-model="ch.currentCustomer.PrimaryPhone.FreeFormNumber"
                 required>
-
+              <div data-size="normal" class="g-recaptcha" data-sitekey="6LeWCCETAAAAAO___dCNPAm95cXfrf9CBukxkMVi"></div>
             </div>
             <div class="form-group col-md-6 col-xs-12">
               <label for="name">Company Name</label>
-              <input placeholder="Please provide your company name, leave blank if no company." type="text" class="form-control" ng-model="ch.currentCustomer.CompanyName">
+                <input placeholder="Please provide your company name, leave blank if no company." type="text" class="form-control" ng-model="ch.currentCustomer.CompanyName">
               <label for="address">Address</label>
-              <input placeholder="Please provide street and house" type="text" class="form-control" ng-model="ch.currentCustomer.billAddress"></textarea>
+                <input placeholder="Please provide street and house" type="text" class="form-control" ng-model="ch.currentCustomer.BillAddr.Line1">
               <label for="address">City</label>
-              <input placeholder="Please provide city" type="text" class="form-control" ng-model="ch.currentCustomer.billAddress"></textarea>
+                <input placeholder="Please provide city" type="text" class="form-control" ng-model="ch.currentCustomer.BillAddr.City">
               <label for="address">State</label>
-              <input placeholder="Please provide state" type="text" class="form-control" ng-model="ch.currentCustomer.billAddress"></textarea>
+                <input placeholder="Please provide state" type="text" class="form-control" ng-model="ch.currentCustomer.BillAddr.CountrySubDivisionCode">
               <label for="address">ZIP</label>
-              <input placeholder="Please provide zip" type="text" class="form-control" ng-model="ch.currentCustomer.billAddress"></textarea>
-
-
-            </div>
-
-            <div class="col-md-6 col-xs-12">
-              <div data-size="normal" class="g-recaptcha" data-sitekey="6LeWCCETAAAAAO___dCNPAm95cXfrf9CBukxkMVi"></div>
-            </div>
-            <div class="col-md-6 col-xs-12 btn-group">
+                <input placeholder="Please provide zip" type="text" class="form-control" ng-model="ch.currentCustomer.BillAddr.PostalCode">
               <button type="submit" class="btn btn-success pull-right" style="width: 100%">SEND</button>
             </div>
-
           </form>
         </div>
       </div>
