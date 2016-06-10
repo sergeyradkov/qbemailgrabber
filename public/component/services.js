@@ -6,14 +6,14 @@ angular.module('qbhelper').
             return $http.get('/lookup?phoneNumber=' + phoneNumber)
         }
 
-        this.updateCustomer = function (updatedCustomer) {
+        this.updateCustomer = function (customer) {
             debugger
-            $http.post('/', updatedCustomer);
+            $http.post('/update', customer);
 
         }
     })
 
-    .service('recaptchaService', function ($http) {
+    .service('RecaptchaService', function ($http) {
         return {
             sendForm: function (item) {
                 return $http({

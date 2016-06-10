@@ -86,6 +86,12 @@ app.get('/lookup', function (req, res) {
   })
 })
 
+app.post('/update', function(req, res){
+  updateCuctomerByPhone(req.query.customer, function(customer){
+    res.send(customer)
+  })
+})
+
 
 app.get('/start', function (req, res) {
   console.log('authenticating connection, please wait.....')
@@ -96,16 +102,46 @@ app.get('/ready', function (req, res) {
   res.sendFile(__dirname + '/public/index.html')
 })
 
-qbo.updateCustomer({
-  Id: 42,
-  SyncToken: 1,
-  sparse: true,
-  PrimaryEmailAddr: {Address: 'customer@example.com'}
-    }, function(err, customer) {
-       if (err) console.log(err)
-       else console.log(customer)
-})
+function updateCuctomerByPhone (customer, callback) {
 
+  var qbo = getQbo();
+
+  qbo.updateCustomer({
+    Id: customer.Id,
+    SyncToken: customer.SyncToken,
+    sparse: customer.sparse,
+
+    PrimaryEmailAddr: {Address: customer.PrimaryEmailAddr.Address}
+      }, function(err, customer) {
+        if (err) console.log(err)
+        else console.log(customer)
+})
+}
+
+function findCustomerByPhone(phone, callback) {
+  var qbo = getQbo()
+  qbo.findCustomers([
+    { field: 'fetchAll', value: true },
+  ], function (e, res) {
+    var customer = res.QueryResponse.Customer.find(x => x.PrimaryPhone && x.PrimaryPhone.FreeFormNumber == phone);
+    callback(customer);
+  })
+}
+
+var _qbo
+function getQbo() {
+  if (!_qbo) {
+    _qbo = new QuickBooks(consumerKey,
+      consumerSecret,
+      ot,
+      ots,
+      realmId,
+      true, // use the Sandbox
+      true) // turn debugging on
+  }
+
+  return _qbo
+}
 
 // THE CAPTURE VERIFICATION PART
 
@@ -135,27 +171,4 @@ app.listen(port, function () {
   console.log('Express server listening on port ' + app.get('port'))
 })
 
-function findCustomerByPhone(phone, callback) {
-  var qbo = getQbo()
-  qbo.findCustomers([
-    { field: 'fetchAll', value: true },
-  ], function (e, res) {
-    var customer = res.QueryResponse.Customer.find(x => x.PrimaryPhone && x.PrimaryPhone.FreeFormNumber == phone);
-    callback(customer);
-  })
-}
 
-var _qbo
-function getQbo() {
-  if (!_qbo) {
-    _qbo = new QuickBooks(consumerKey,
-      consumerSecret,
-      ot,
-      ots,
-      realmId,
-      true, // use the Sandbox
-      true) // turn debugging on
-  }
-
-  return _qbo
-}

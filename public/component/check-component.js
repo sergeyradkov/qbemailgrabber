@@ -3,7 +3,7 @@
 angular.module('qbhelper').component('customerComponent', {
     templateUrl: '/component/check.html',
     controllerAs: 'ch',
-    controller: function ($scope, $state, MemberService, PhoneService) {
+    controller: function ($scope, $state, MemberService, PhoneService, RecaptchaService) {
 
         var ch = this;
 
@@ -37,8 +37,8 @@ angular.module('qbhelper').component('customerComponent', {
             debugger
 
             if (grecaptcha.getResponse()) {
-                currentCustomer.captchaResponse = grecaptcha.getResponse(); //This will add the response string to the object you are sending to your server so you can make your get request server side to verify
-                recaptchaService.sendForm(customer).then(function (response) {
+                updatedCustomer.captchaResponse = grecaptcha.getResponse(); //This will add the response string to the object you are sending to your server so you can make your get request server side to verify
+                RecaptchaService.sendForm(updatedCustomer).then(function (response) {
                     window.response = response.data;
                     });
                 MemberService.updateCustomer(updatedCustomer).then(handleServerSuccess, handleServerError);
