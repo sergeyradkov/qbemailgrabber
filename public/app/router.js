@@ -1,6 +1,6 @@
 (function(){angular.module("qbhelper",['ui.router'])}());
 
-angular.module("qbhelper")
+/*angular.module("qbhelper")
     .config(function ($stateProvider) {
 
     $stateProvider
@@ -10,11 +10,11 @@ angular.module("qbhelper")
         controller: 'CheckController',
         controllerAs: 'ch'
     })
-    
+
    /* .state('check.customer', {
         url: '/update/:id',
         templateUrl: '/views/customer/customer.html',
         controller: 'CustomerController',
         controllerAs: 'cc'
-    }) */
-})
+    }) 
+}) */
