@@ -17,9 +17,8 @@ angular.module('qbhelper').component('customerComponent', {
                 ch.checked = true;
                 ch.currentCustomer = res.data;
                 console.log(ch.currentCustomer);
-                ch.currentCustomer.phoneNumber = res.data.PrimaryPhone.FreeFormNumber;
+            //    ch.currentCustomer.phoneNumber = res.data.PrimaryPhone.FreeFormNumber;
                 debugger
-                //   $state.go('customer', { id: res.data.id })
             } else {
                 console.log(" ERROR ");
                 $('#myModal').modal('show');

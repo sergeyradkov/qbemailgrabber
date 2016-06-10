@@ -7,9 +7,10 @@ angular.module('qbhelper').
             return $http.get('/lookup?phoneNumber=' + phoneNumber)
         }
 
-        this.findCustomerById = function (id) {
-            return $http.get('/customer?id=' + id)
-        }
+        // this.findCustomerById = function (id) {
+        //     return $http.get('/customer?id=' + id)
+        // }
+
 
     })
 
@@ -28,7 +29,6 @@ angular.module('qbhelper').
     .service('PhoneService', function ($http) {
 
     this.formatPhoneNumber = function (tel) {
-        /* if (!tel) { return ''; }*/
 
         var value = tel.toString().trim().replace(/^\+/, '');
 
