@@ -55,16 +55,3 @@ angular.module('qbhelper').component('customerComponent', {
     }
 });
 
-(function () {
-    angular.module("qbhelper").service('recaptchaService', function ($http) {
-        return {
-            sendForm: function (item) {
-                return $http({
-                    method: 'POST',
-                    url: '/',
-                    data: item
-                });
-            }
-        }
-    });
-})();

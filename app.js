@@ -2,30 +2,31 @@ var http = require('http'),
   express = require('express'),
   app = express(),
   port = process.env.PORT || 8080
-request = require('request'),
-bodyParser = require('body-parser'),
-qs = require('querystring'),
-util = require('util'),
-cookieParser = require('cookie-parser'),
-session = require('express-session'),
-QuickBooks = require('./index')
-captchaUrl = 'https://www.google.com/recaptcha/api/siteverify?secret=6LeWCCETAAAAAGtTk0MKqtHyPEyNZtfRpqND-uV1&response='
+  request = require('request'),
+  bodyParser = require('body-parser'),
+  qs = require('querystring'),
+  util = require('util'),
+  cookieParser = require('cookie-parser'),
+  session = require('express-session'),
+  QuickBooks = require('./index')
+  captchaUrl = 'https://www.google.com/recaptcha/api/siteverify?secret=6LeWCCETAAAAAGtTk0MKqtHyPEyNZtfRpqND-uV1&response='
 
 // GENERIC EXPRESS CONFIG
 app.use(express.static(__dirname + '/public'))
 app.set('port', port)
 app.set('views', 'views')
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser('brad'))
-app.use(session({resave: false, saveUninitialized: false, secret: 'smith'}))
+app.use(session({ resave: false, saveUninitialized: false, secret: 'smith' }))
 
 var consumerKey = 'qyprdTjD18ZhGt5PwnU2jvy6lMn69O',
   consumerSecret = 'kayCfBs78Ce4zYrS4euUx9PVha4O18IInYgRlVvB'
-ot = 'qyprdayqvuyFm1IojfHE85vWjDKaP6BDvORHUyI9936xXtHk',
-ots = 'T4f6y6c9mgUhindX7q7mXssCZ2CvTeRMY1BnrdfE',
-realmId = '123145721128202'
-function QBO (req, res, consumerKey, consumerSecret) {
+  ot = 'qyprdayqvuyFm1IojfHE85vWjDKaP6BDvORHUyI9936xXtHk',
+  ots = 'T4f6y6c9mgUhindX7q7mXssCZ2CvTeRMY1BnrdfE',
+  realmId = '123145721128202'
+
+function QBO(req, res, consumerKey, consumerSecret) {
   var postBody = {
     url: QuickBooks.REQUEST_TOKEN_URL,
     oauth: {
@@ -80,7 +81,7 @@ app.get('/callback', function (req, res) {
 
 app.get('/lookup', function (req, res) {
   console.log('did I get a phone number?', req.query.phoneNumber)
-  findCustomerByPhone(req.query.phoneNumber,function(customer){
+  findCustomerByPhone(req.query.phoneNumber, function (customer) {
     res.send(customer)
   })
 })
@@ -91,7 +92,7 @@ app.get('/lookup', function (req, res) {
 //     res.send({member: {id: customer.Id, displayName: customer.DisplayName}})
 //     res.send({customer: {id: 123456789, displayName: 'My Fake Member', phoneNumber: 1234567890}})
 //   })
- 
+
 // })
 
 app.get('/start', function (req, res) {
@@ -131,10 +132,10 @@ app.listen(port, function () {
   console.log('Express server listening on port ' + app.get('port'))
 })
 
-function findCustomerByPhone (phone, callback) {
+function findCustomerByPhone(phone, callback) {
   var qbo = getQbo()
   qbo.findCustomers([
-    {field: 'fetchAll', value: true},
+    { field: 'fetchAll', value: true },
   ], function (e, res) {
     var customer = res.QueryResponse.Customer.find(x => x.PrimaryPhone && x.PrimaryPhone.FreeFormNumber == phone);
     callback(customer);
@@ -142,7 +143,7 @@ function findCustomerByPhone (phone, callback) {
 }
 
 var _qbo
-function getQbo () {
+function getQbo() {
   if (!_qbo) {
     _qbo = new QuickBooks(consumerKey,
       consumerSecret,
@@ -155,35 +156,3 @@ function getQbo () {
 
   return _qbo
 }
-/*
-// INSERT YOUR CONSUMER_KEY AND CONSUMER_SECRET HERE
-
-var consumerKey    = 'qyprdTjD18ZhGt5PwnU2jvy6lMn69O',
-    consumerSecret = 'kayCfBs78Ce4zYrS4euUx9PVha4O18IInYgRlVvB'
-
-app.get('/',function(req,res){
-  res.redirect('/start')
-})
-
-app.get('/start', function(req, res) {
-  res.render(__dirname+'/views/intuit.ejs', {locals: {port:port, appCenter: QuickBooks.APP_CENTER_BASE}})
-})
-
-app.get('/requestToken', function(req, res) {
-  var postBody = {
-    url: QuickBooks.REQUEST_TOKEN_URL,
-    oauth: {
-      callback:        'http://localhost:' + port + '/callback/',
-      consumer_key:    consumerKey,
-      consumer_secret: consumerSecret
-    }
-  }
-  request.post(postBody, function (e, r, data) {
-    var requestToken = qs.parse(data)
-    req.session.oauth_token_secret = requestToken.oauth_token_secret
-    console.log(requestToken)
-    res.redirect(QuickBooks.APP_CENTER_URL + requestToken.oauth_token)
-  })
-})
-
-*/

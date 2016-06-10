@@ -1,7 +1,34 @@
-angular.module('qbhelper').service('PhoneService', function ($http) {
+angular.module('qbhelper').
 
-        this.formatPhoneNumber = function (tel) {
-       /* if (!tel) { return ''; }*/
+    service('MemberService', function ($http) {
+
+        this.findMemberByPhone = function (phoneNumber) {
+
+            return $http.get('/lookup?phoneNumber=' + phoneNumber)
+        }
+
+        this.findCustomerById = function (id) {
+            return $http.get('/customer?id=' + id)
+        }
+
+    })
+
+    .service('recaptchaService', function ($http) {
+        return {
+            sendForm: function (item) {
+                return $http({
+                    method: 'POST',
+                    url: '/',
+                    data: item
+                });
+            }
+        }
+    })
+
+    .service('PhoneService', function ($http) {
+
+    this.formatPhoneNumber = function (tel) {
+        /* if (!tel) { return ''; }*/
 
         var value = tel.toString().trim().replace(/^\+/, '');
 
