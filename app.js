@@ -62,12 +62,12 @@ app.get('/callback', function (req, res) {
 
     // save the access token somewhere on behalf of the logged in user
     qbo = new QuickBooks(consumerKey,
-      consumerSecret,
-      accessToken.oauth_token,
-      accessToken.oauth_token_secret,
-      postBody.oauth.realmId,
-      true, // use the Sandbox
-      true) // turn debugging on
+              consumerSecret,
+              accessToken.oauth_token,
+              accessToken.oauth_token_secret,
+              postBody.oauth.realmId,
+              true, // use the Sandbox
+              true) // turn debugging on
 
     // test out account access
     qbo.findAccounts(function (_, accounts) {
@@ -86,14 +86,6 @@ app.get('/lookup', function (req, res) {
   })
 })
 
-// app.get('/customer', function (req, res) {
-//   console.log('did I get a customer Id?', req.query.id)
-//   findCustomerById(req.query.phoneNumber,function(customer){
-//     res.send({member: {id: customer.Id, displayName: customer.DisplayName}})
-//     res.send({customer: {id: 123456789, displayName: 'My Fake Member', phoneNumber: 1234567890}})
-//   })
-
-// })
 
 app.get('/start', function (req, res) {
   console.log('authenticating connection, please wait.....')
@@ -104,10 +96,21 @@ app.get('/ready', function (req, res) {
   res.sendFile(__dirname + '/public/index.html')
 })
 
+qbo.updateCustomer({
+  Id: 42,
+  SyncToken: 1,
+  sparse: true,
+  PrimaryEmailAddr: {Address: 'customer@example.com'}
+    }, function(err, customer) {
+       if (err) console.log(err)
+       else console.log(customer)
+})
+
+
 // THE CAPTURE VERIFICATION PART
 
 app.post('/', function (req, res) {
-  checkCaptcha(req.body.captchaResponse, function (response) {
+    checkCaptcha(req.body.captchaResponse, function (response) {
     console.log(response.success)
     if (response.success) {
       res.send('WOOT! you are not a robot')
