@@ -1,6 +1,6 @@
 
 
-angular.module('qbhelper').component('CustomerComponent', {
+angular.module('qbhelper').component('customerComponent', {
     templateUrl: '/views/check/check.html',
     controller: function ($scope, $state, MemberService, PhoneService) {
 
