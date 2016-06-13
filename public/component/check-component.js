@@ -13,8 +13,10 @@ angular.module('qbhelper').component('customerComponent', {
         }
 
         function handleUpdateSuccess(res){
-            ch.successMessage = res.data.message;
-            $scope.$evalAsync()
+            console.log(" Update success");
+            ch.message = res.data.message;
+            $('#showMessage').modal('show');
+            // $scope.$evalAsync()
         }
 
         function handleServerSuccess(res) {
@@ -23,13 +25,15 @@ angular.module('qbhelper').component('customerComponent', {
                 ch.currentCustomer = res.data;
             } else {
                 console.log(" WRONG PHONE NUMBER ");
-                $('#phoneWrong').modal('show');
+                ch.message = "Sorry, but we do not know this phone number. Please, try again.."
+                $('#showMessage').modal('show');
             }
         }
 
         function handleServerError(err) {
                 console.log("SERVER ERROR ");
-                $('#serverError').modal('show');
+                ch.message = "Sorry, but there is some error. Please, try again.."
+                $('#showMessage').modal('show');
         }
 
 // TODO normolize the phone number
