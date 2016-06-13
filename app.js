@@ -85,7 +85,7 @@ app.get('/lookup', function (req, res) {
   })
 })
 
-app.put('/updated', function(req, res){
+app.post('/updated', function(req, res){
   updateCuctomerByPhone(req.body, function(customer){
     res.send(some)
   })
@@ -104,14 +104,10 @@ app.get('/ready', function (req, res) {
 function updateCuctomerByPhone (customer, callback) {
 
   var qbo = getQbo();
-
-  qbo.updateCustomer({
-    Id: customer.Id,
-    SyncToken: customer.SyncToken,
-    sparse: customer.sparse,
-
-    PrimaryEmailAddr: {Address: customer.PrimaryEmailAddr.Address}
-      }, function(err, customer) {
+  delete customer.captchaResponse
+  delete customer.captchaUrl
+  
+  qbo.updateCustomer(customer, function(err, customer) {
         if (err) console.log(err)
         else console.log(customer)
 })
@@ -122,6 +118,13 @@ function findCustomerByPhone(phone, callback) {
   qbo.findCustomers([
     { field: 'fetchAll', value: true },
   ], function (e, res) {
+    // var x = res.QueryResponse.Customer.find(xb => xb.PrimaryEmailAddr.Address == 'banana@intuit.com')
+    // console.log('the customer: ', x)
+    // res.QueryResponse.Customer.forEach(function(x){
+    //   if(x && x.PrimaryEmailAddr && x.PrimaryEmailAddr.Address == 'banana@intuit.com'){
+    //     console.log(x)
+    //   }
+    // })
     var customer = res.QueryResponse.Customer.find(x => x.PrimaryPhone && x.PrimaryPhone.FreeFormNumber == phone);
     callback(customer);
   })

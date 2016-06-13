@@ -8,7 +8,7 @@ angular.module('qbhelper').
 
         this.updateCustomer = function (customer) {
             debugger
-            return $http.put('/updated', customer);
+            return $http.post('/updated', customer);
 
         }
     })
