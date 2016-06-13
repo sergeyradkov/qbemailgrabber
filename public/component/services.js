@@ -25,7 +25,7 @@ angular.module('qbhelper').
         }
     })
 
-    .service('PhoneService', function ($http) {
+    .service('PhoneService', function () {
 
         this.formatPhoneNumber = function (tel) {
 

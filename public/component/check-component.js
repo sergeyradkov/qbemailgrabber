@@ -6,6 +6,7 @@ angular.module('qbhelper').component('customerComponent', {
     controller: function ($scope, $state, MemberService, PhoneService, RecaptchaService) {
 
         var ch = this;
+        ch.phoneNumber = "";
 
         ch.formatPhoneNumber = function (phoneNumber) {
             ch.phoneNumber = PhoneService.formatPhoneNumber(phoneNumber)
@@ -40,9 +41,10 @@ angular.module('qbhelper').component('customerComponent', {
                 updatedCustomer.captchaResponse = grecaptcha.getResponse(); //This will add the response string to the object you are sending to your server so you can make your get request server side to verify
                 RecaptchaService.sendForm(updatedCustomer).then(function (response) {
                     window.response = response.data;
+                    MemberService.updateCustomer(updatedCustomer).then(handleServerSuccess, handleServerError);
+                    ch.currentCustomer = {};
                     });
-                MemberService.updateCustomer(updatedCustomer).then(handleServerSuccess, handleServerError);
-                ch.currentCustomer = {};
+
             } else {
                 $('#serverError').modal('show');
             }
