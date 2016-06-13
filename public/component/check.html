@@ -96,13 +96,17 @@
           <h3 class="modal-title">Phone Verification</h3>
         </div>
         <div class="modal-body">
-          <h4>Sorry, but we do not know this phone number. Please, try again..</h4>
+          <h4>Sorry, but there is some error. Please, try again..</h4>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
+  </div>
+
+  <div class="alert alert-success" ng-if="ch.successMessage">
+    {{ch.successMessage}}
   </div>
 
 </div>

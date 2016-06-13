@@ -2,14 +2,14 @@ var http = require('http'),
   express = require('express'),
   app = express(),
   port = process.env.PORT || 8080
-  request = require('request'),
+request = require('request'),
   bodyParser = require('body-parser'),
   qs = require('querystring'),
   util = require('util'),
   cookieParser = require('cookie-parser'),
   session = require('express-session'),
   QuickBooks = require('./index')
-  captchaUrl = 'https://www.google.com/recaptcha/api/siteverify?secret=6LeWCCETAAAAAGtTk0MKqtHyPEyNZtfRpqND-uV1&response='
+captchaUrl = 'https://www.google.com/recaptcha/api/siteverify?secret=6LeWCCETAAAAAGtTk0MKqtHyPEyNZtfRpqND-uV1&response='
 
 // GENERIC EXPRESS CONFIG
 app.use(express.static(__dirname + '/public'))
@@ -22,7 +22,7 @@ app.use(session({ resave: false, saveUninitialized: false, secret: 'smith' }))
 
 var consumerKey = 'qyprdTjD18ZhGt5PwnU2jvy6lMn69O',
   consumerSecret = 'kayCfBs78Ce4zYrS4euUx9PVha4O18IInYgRlVvB'
-  ot = 'qyprdayqvuyFm1IojfHE85vWjDKaP6BDvORHUyI9936xXtHk',
+ot = 'qyprdayqvuyFm1IojfHE85vWjDKaP6BDvORHUyI9936xXtHk',
   ots = 'T4f6y6c9mgUhindX7q7mXssCZ2CvTeRMY1BnrdfE',
   realmId = '123145721128202'
 
@@ -62,12 +62,12 @@ app.get('/callback', function (req, res) {
 
     // save the access token somewhere on behalf of the logged in user
     qbo = new QuickBooks(consumerKey,
-              consumerSecret,
-              accessToken.oauth_token,
-              accessToken.oauth_token_secret,
-              postBody.oauth.realmId,
-              true, // use the Sandbox
-              true) // turn debugging on
+      consumerSecret,
+      accessToken.oauth_token,
+      accessToken.oauth_token_secret,
+      postBody.oauth.realmId,
+      true, // use the Sandbox
+      true) // turn debugging on
 
     // test out account access
     qbo.findAccounts(function (_, accounts) {
@@ -85,9 +85,9 @@ app.get('/lookup', function (req, res) {
   })
 })
 
-app.post('/updated', function(req, res){
-  updateCuctomerByPhone(req.body, function(customer){
-    res.send(some)
+app.post('/updated', function (req, res) {
+  updateCuctomerByPhone(req.body, function (customer) {
+    res.sendStatus({ message: 'Your profile was updated successfully'});
   })
 })
 
@@ -101,16 +101,19 @@ app.get('/ready', function (req, res) {
   res.sendFile(__dirname + '/public/index.html')
 })
 
-function updateCuctomerByPhone (customer, callback) {
+function updateCuctomerByPhone(customer, callback) {
 
   var qbo = getQbo();
   delete customer.captchaResponse
   delete customer.captchaUrl
-  
-  qbo.updateCustomer(customer, function(err, customer) {
-        if (err) console.log(err)
-        else console.log(customer)
-})
+
+  qbo.updateCustomer(customer, function (err, customer) {
+    if (err) console.log(err)
+    // else console.log(customer)
+    if(callback && typeof callback == 'function'){
+      callback(customer)
+    }
+  })
 }
 
 function findCustomerByPhone(phone, callback) {
@@ -118,13 +121,6 @@ function findCustomerByPhone(phone, callback) {
   qbo.findCustomers([
     { field: 'fetchAll', value: true },
   ], function (e, res) {
-    // var x = res.QueryResponse.Customer.find(xb => xb.PrimaryEmailAddr.Address == 'banana@intuit.com')
-    // console.log('the customer: ', x)
-    // res.QueryResponse.Customer.forEach(function(x){
-    //   if(x && x.PrimaryEmailAddr && x.PrimaryEmailAddr.Address == 'banana@intuit.com'){
-    //     console.log(x)
-    //   }
-    // })
     var customer = res.QueryResponse.Customer.find(x => x.PrimaryPhone && x.PrimaryPhone.FreeFormNumber == phone);
     callback(customer);
   })
@@ -148,8 +144,7 @@ function getQbo() {
 // THE CAPTURE VERIFICATION PART
 
 app.post('/', function (req, res) {
-    checkCaptcha(req.body.captchaResponse, function (response) {
-    console.log(response.success)
+  checkCaptcha(req.body.captchaResponse, function (response) {
     if (response.success) {
       res.send('WOOT! you are not a robot')
     } else {
@@ -163,7 +158,6 @@ var checkCaptcha = function (captchaResponse, cb) {
     if (err) {
       console.log('error: ', err)
     } else {
-      console.log(body)
       return cb(JSON.parse(body))
     }
   })

@@ -12,6 +12,11 @@ angular.module('qbhelper').component('customerComponent', {
             ch.phoneNumber = PhoneService.formatPhoneNumber(phoneNumber)
         }
 
+        function handleUpdateSuccess(res){
+            ch.successMessage = res.data.message;
+            $scope.$evalAsync()
+        }
+
         function handleServerSuccess(res) {
             if (res.data) {
                 ch.checked = true;
@@ -34,15 +39,12 @@ angular.module('qbhelper').component('customerComponent', {
         };
 
         ch.updateCustomer = function (updatedCustomer) {
-            console.log(updatedCustomer);
-            debugger
-
             if (grecaptcha.getResponse()) {
-                updatedCustomer.captchaResponse = grecaptcha.getResponse(); //This will add the response string to the object you are sending to your server so you can make your get request server side to verify
-                debugger
+                updatedCustomer.captchaResponse = grecaptcha.getResponse();
                 RecaptchaService.sendForm().then(function (response) {
                     window.response = response.data;
-                    MemberService.updateCustomer(updatedCustomer).then(handleServerSuccess, handleServerError);
+                    MemberService.updateCustomer(updatedCustomer).then(handleUpdateSuccess, handleServerError);
+                    debugger
                     ch.currentCustomer = {};
                     });
             } else {
