@@ -87,7 +87,7 @@ app.get('/lookup', function (req, res) {
 
 app.post('/updated', function (req, res) {
   updateCuctomerByPhone(req.body, function (customer) {
-    res.sendStatus({ message: 'Your profile was updated successfully'});
+    res.sendStatus({ message: 'Your profile was updated successfully', customer: customer });
   })
 })
 
