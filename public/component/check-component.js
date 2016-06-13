@@ -39,12 +39,12 @@ angular.module('qbhelper').component('customerComponent', {
 
             if (grecaptcha.getResponse()) {
                 updatedCustomer.captchaResponse = grecaptcha.getResponse(); //This will add the response string to the object you are sending to your server so you can make your get request server side to verify
-                RecaptchaService.sendForm(updatedCustomer).then(function (response) {
+                debugger
+                RecaptchaService.sendForm().then(function (response) {
                     window.response = response.data;
                     MemberService.updateCustomer(updatedCustomer).then(handleServerSuccess, handleServerError);
                     ch.currentCustomer = {};
                     });
-
             } else {
                 $('#serverError').modal('show');
             }

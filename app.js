@@ -80,15 +80,14 @@ app.get('/callback', function (req, res) {
 })
 
 app.get('/lookup', function (req, res) {
-  console.log('did I get a phone number?', req.query.phoneNumber)
   findCustomerByPhone(req.query.phoneNumber, function (customer) {
     res.send(customer)
   })
 })
 
-app.post('/update', function(req, res){
-  updateCuctomerByPhone(req.query.customer, function(customer){
-    res.send(customer)
+app.put('/updated', function(req, res){
+  updateCuctomerByPhone(req.body, function(customer){
+    res.send(some)
   })
 })
 
