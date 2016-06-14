@@ -167,8 +167,8 @@ app.listen(port, function () {
 
 // TWILIO PART
 
-var ACCOUNT_SID = '';
-var AUTH_TOKEN = '';
+var ACCOUNT_SID = 'AC48148f3f2d267b5bb05f41ba082bdf41';
+var AUTH_TOKEN = 'b2bb51ba7eaf8f7d4bf4d0504efc049d';
 var myNumber = '+12085059247';
 var sendNumber = '+12082839080';
 
