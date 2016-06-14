@@ -14,9 +14,8 @@ angular.module('qbhelper').component('customerComponent', {
 
         function handleUpdateSuccess(res){
             console.log(" Update success");
-            ch.message = res.data.message;
+            ch.message = "Your profile was updated successfully";
             $('#showMessage').modal('show');
-            // $scope.$evalAsync()
         }
 
         function handleServerSuccess(res) {

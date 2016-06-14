@@ -87,7 +87,7 @@ app.get('/lookup', function (req, res) {
 
 app.post('/updated', function (req, res) {
   updateCuctomerByPhone(req.body, function (customer) {
-    res.sendStatus({ message: 'Your profile was updated successfully', customer: customer });
+    res.send(200);
   })
 })
 
@@ -107,9 +107,8 @@ function updateCuctomerByPhone(customer, callback) {
   delete customer.captchaResponse
   delete customer.captchaUrl
 
-  qbo.updateCustomer(customer, function (err, customer) {
+qbo.updateCustomer(customer, function (err, customer) {
     if (err) console.log(err)
-    // else console.log(customer)
     if(callback && typeof callback == 'function'){
       callback(customer)
     }
@@ -137,7 +136,6 @@ function getQbo() {
       true, // use the Sandbox
       true) // turn debugging on
   }
-
   return _qbo
 }
 
