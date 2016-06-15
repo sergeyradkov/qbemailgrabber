@@ -9,7 +9,7 @@ var http = require('http'),
   cookieParser = require('cookie-parser'),
   session = require('express-session'),
   QuickBooks = require('./index'),
-  secret = require('./config')
+  // secret = require('./config'),
   captchaUrl = 'https://www.google.com/recaptcha/api/siteverify?secret=6LeWCCETAAAAAGtTk0MKqtHyPEyNZtfRpqND-uV1&response='
 
 // GENERIC EXPRESS CONFIG
@@ -22,10 +22,10 @@ app.use(cookieParser('brad'))
 app.use(session({ resave: false, saveUninitialized: false, secret: 'smith' }))
 
 var consumerKey = 'qyprdTjD18ZhGt5PwnU2jvy6lMn69O',
-  consumerSecret = 'kayCfBs78Ce4zYrS4euUx9PVha4O18IInYgRlVvB'
-  ot = 'qyprdayqvuyFm1IojfHE85vWjDKaP6BDvORHUyI9936xXtHk',
-  ots = 'T4f6y6c9mgUhindX7q7mXssCZ2CvTeRMY1BnrdfE',
-  realmId = '123145721128202'
+    consumerSecret = 'kayCfBs78Ce4zYrS4euUx9PVha4O18IInYgRlVvB'
+    ot = 'qyprdayqvuyFm1IojfHE85vWjDKaP6BDvORHUyI9936xXtHk',
+    ots = 'T4f6y6c9mgUhindX7q7mXssCZ2CvTeRMY1BnrdfE',
+    realmId = '123145721128202'
   // realmId = secret.realmId;
 
 function QBO(req, res, consumerKey, consumerSecret) {

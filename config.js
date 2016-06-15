@@ -1,3 +1,7 @@
+module.exports = secret;
+
+secret.realmId = '123145721128202';
+
 module.exports = {
        consumerKey:     'qyprdTjD18ZhGt5PwnU2jvy6lMn69O',
        consumerSecret:  'kayCfBs78Ce4zYrS4euUx9PVha4O18IInYgRlVvB',
