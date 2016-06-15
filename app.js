@@ -169,32 +169,38 @@ app.listen(port, function () {
 
 var ACCOUNT_SID = 'AC48148f3f2d267b5bb05f41ba082bdf41';
 var AUTH_TOKEN = 'b2bb51ba7eaf8f7d4bf4d0504efc049d';
-var myNumber = '+12085059247';
+// var myNumber = '+12085059247';
+var myNumber = "+15005550006";
 var sendNumber = '+12082839080';
 
 //require the Twilio module and create a REST client
 var client = require('twilio')(ACCOUNT_SID, AUTH_TOKEN);
 
-//Send an SMS text message
-client.sendMessage({
+app.post('/calling', function(req, res){
+  //Send an SMS text message
+  client.sendMessage({
 
-    to: sendNumber, // Any number Twilio can deliver to
-    from: myNumber, // A number you bought from Twilio and can use for outbound communication
-    body: 'word to your mother.' // body of the SMS message
+      to: req.body.sendNumber, // Any number Twilio can deliver to
+      from: myNumber, // A number you bought from Twilio and can use for outbound communication
+      body: 'Hello word' // body of the SMS message
 
-}, function(err, responseData) { //this function is executed when a response is received from Twilio
+  }, function(err, responseData) { //this function is executed when a response is received from Twilio
 
-    if (!err) { // "err" is an error received during the request, if any
+      if (!err) { // "err" is an error received during the request, if any
 
-        // "responseData" is a JavaScript object containing data received from Twilio.
-        // A sample response from sending an SMS message is here (click "JSON" to see how the data appears in JavaScript):
-        // http://www.twilio.com/docs/api/rest/sending-sms#example-1
+          // "responseData" is a JavaScript object containing data received from Twilio.
+          // A sample response from sending an SMS message is here (click "JSON" to see how the data appears in JavaScript):
+          // http://www.twilio.com/docs/api/rest/sending-sms#example-1
 
-        console.log(responseData.from); // outputs "+14506667788"
-        console.log(responseData.body); // outputs "word to your mother."
+          console.log(responseData.from); // outputs "+14506667788"
+          console.log(responseData.body); // outputs "word to your mother."
 
-    }
-});
+      }
+      res.send({err: err, response: responseData})
+  });
+
+})
+
 
 // //Place a phone call, and respond with TwiML instructions from the given URL
 // client.makeCall({
