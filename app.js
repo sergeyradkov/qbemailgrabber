@@ -163,9 +163,7 @@ var checkCaptcha = function (captchaResponse, cb) {
   })
 }
 
-app.listen(port, function () {
-  console.log('Express server listening on port ' + app.get('port'))
-})
+
 
 // TWILIO PART
 
@@ -203,17 +201,8 @@ app.post('/calling', function(req, res){
 
 })
 
+// END OF TWILIO
 
-// //Place a phone call, and respond with TwiML instructions from the given URL
-// client.makeCall({
-
-//     to:'+16515556677', // Any number Twilio can call
-//     from: '+14506667788', // A number you bought from Twilio and can use for outbound communication
-//     url: 'http://www.example.com/twiml.php' // A URL that produces an XML document (TwiML) which contains instructions for the call
-
-// }, function(err, responseData) {
-
-//     //executed when the call has been initiated.
-//     console.log(responseData.from); // outputs "+14506667788"
-
-// });
+app.listen(port, function () {
+  console.log('Express server listening on port ' + app.get('port'))
+})
