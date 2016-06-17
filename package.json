@@ -8,28 +8,28 @@
   },
   "author": "Jay and Sergey",
   "license": "ISC",
-    "keywords": [
+  "keywords": [
     "Intuit",
     "QuickBooks",
     "Intuit Developer"
   ],
-
   "dependencies": {
+    "bluebird": "2.9.25",
+    "body-parser": "^1.15.1",
+    "config-json": "^1.0.0",
+    "cookie-parser": "^1.4.3",
+    "ejs": "^2.4.2",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
-    "npm": "^3.9.2",
-    "body-parser": "^1.15.1",
-    "request": "^2.72.0",
-    "node-quickbooks": "^2.0.8",
-    "cookie-parser": "^1.4.3",
-    "util": "0.10.3",
-    "ejs": "^2.4.2",
-    "bluebird": "2.9.25",
     "moment": "^2.8.2",
+    "node-quickbooks": "^2.0.8",
     "node-uuid": "^1.4.1",
+    "npm": "^3.9.2",
     "querystring": "0.2.0",
+    "request": "^2.72.0",
     "request-debug": "0.0.1",
+    "twilio": "^2.9.1",
     "underscore": "1.6.0",
-    "twilio": "^2.9.1"
+    "util": "0.10.3"
   }
 }

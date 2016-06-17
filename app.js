@@ -9,7 +9,7 @@ var http = require('http'),
   cookieParser = require('cookie-parser'),
   session = require('express-session'),
   QuickBooks = require('./index'),
-  config = require('./config.json')
+  config = require('config-json'),
   captchaUrl = 'https://www.google.com/recaptcha/api/siteverify?secret=6LeWCCETAAAAAGtTk0MKqtHyPEyNZtfRpqND-uV1&response='
 
 // GENERIC EXPRESS CONFIG
@@ -21,11 +21,15 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser('brad'))
 app.use(session({ resave: false, saveUninitialized: false, secret: 'smith' }))
 
-// var consumerKey = 'qyprdTjD18ZhGt5PwnU2jvy6lMn69O',
-//     consumerSecret = 'kayCfBs78Ce4zYrS4euUx9PVha4O18IInYgRlVvB'
-//     ot = 'qyprdayqvuyFm1IojfHE85vWjDKaP6BDvORHUyI9936xXtHk',
-//     ots = 'T4f6y6c9mgUhindX7q7mXssCZ2CvTeRMY1BnrdfE',
-//     realmId = '123145721128202'
+
+
+
+config.load('./config/qbconfig.json');
+var consumerKey = config.get('consumerKey'),
+    consumerSecret = config.get('consumerSecret'),
+    ot  = config.get('ot'),
+    ots = config.get('ots'),
+    realmId = config.get('realmId');
 
 
 function QBO(req, res, consumerKey, consumerSecret) {
@@ -33,7 +37,7 @@ function QBO(req, res, consumerKey, consumerSecret) {
     url: QuickBooks.REQUEST_TOKEN_URL,
     oauth: {
       callback: 'http://localhost:' + port + '/callback/',
-      consumer_key: config.
+      consumer_key: consumerKey,
       consumer_secret: consumerSecret
     }
   }
