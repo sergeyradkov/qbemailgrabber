@@ -40,6 +40,10 @@ angular.module('qbhelper').component('customerComponent', {
             }
         }
 
+        function sendSMS (phone){
+            MemberService.calling(phone).then(CodeSuccess, handleServerError);
+        }
+
 
 
 
@@ -52,12 +56,12 @@ angular.module('qbhelper').component('customerComponent', {
         function handleServerSuccess(res) {
             if (res.data) {
                 ch.vform = true;
-                ch.calling = function () {
-                    MemberService.calling().then(CodeSuccess, handleServerError);
-                }
-
-                // ch.checked = true;
+                phoneForSMS = "+1" + ch.phoneNumber.replace (/[^\d]/g, "");
+                debugger
+                sendSMS(phoneForSMS);
                 // ch.currentCustomer = res.data;
+                // ch.checked = true;
+                
             } else {
                 console.log(" WRONG PHONE NUMBER ");
                 ch.message = "Sorry, but we do not know this phone number. Please, try again.."
