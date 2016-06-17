@@ -10,9 +10,9 @@ angular.module('qbhelper').
             return $http.post('/updated', customer);
         }
 
-        this.calling = function (responce) {
+        this.sendSMS = function (phoneNumber) {
             debugger
-            return $http.post('/calling', responce);
+            return $http.post('/sendSMS?phoneNumber=', phoneNumber);
         }
     })
 

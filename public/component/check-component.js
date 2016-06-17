@@ -41,11 +41,8 @@ angular.module('qbhelper').component('customerComponent', {
         }
 
         function sendSMS (phone){
-            MemberService.calling(phone).then(CodeSuccess, handleServerError);
+            MemberService.sendSMS(phone).then(CodeSuccess, handleServerError);
         }
-
-
-
 
         function handleUpdateSuccess(res) {
             console.log(" Update success");
