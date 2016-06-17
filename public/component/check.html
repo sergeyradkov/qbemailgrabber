@@ -16,7 +16,7 @@
         </div>
       </form>
 
-      <form ng-submit="ch.checkCode(ch.vcode)" ng-show = "ch.vform = true">
+      <form ng-submit="ch.checkCode(ch.vcode)" ng-show = "ch.vform == true">
         <p>We have sent you a verification code. Please enter the code below: </p>
         <div class="input-group input-group-lg">
           <input type="text" class="form-control" ng-model="ch.vcode" maxlength="4" />

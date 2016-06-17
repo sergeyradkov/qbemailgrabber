@@ -8,46 +8,23 @@ angular.module('qbhelper').component('customerComponent', {
         var ch = this;
         ch.phoneNumber = "";
 
+        // formating phone number under the mask
         ch.formatPhoneNumber = function (phoneNumber, customer) {
             var formatted = PhoneService.formatPhoneNumber(phoneNumber);
             ch.phoneNumber = formatted
-            if(customer){
+            if (customer) {
                 ch.currentCustomer.PrimaryPhone.FreeFormNumber = formatted
             }
         }
-        ch.calling = function(){
-            debugger
-            MemberService.calling();
-        }
-
-        function handleUpdateSuccess(res){
-            console.log(" Update success");
-            ch.message = "Your profile was updated successfully";
-            $('#showMessage').modal('show');
-        }
-
-        function handleServerSuccess(res) {
-            if (res.data) {
-                ch.checked = true;
-                ch.currentCustomer = res.data;
-            } else {
-                console.log(" WRONG PHONE NUMBER ");
-                ch.message = "Sorry, but we do not know this phone number. Please, try again.."
-                $('#showMessage').modal('show');
-            }
-        }
-
-        function handleServerError(err) {
-                console.log("SERVER ERROR ");
-                ch.message = "Sorry, but there is some error. Please, try again.."
-                $('#showMessage').modal('show');
-        }
 
 // TODO normolize the phone number
-        ch.find = function (phoneNumber) { 
+
+        // find the phone number in QB SQL
+        ch.find = function (phoneNumber) {
             var normalNumber = phoneNumber;//.replace (/[^\d]/g, "");
             MemberService.findMemberByPhone(normalNumber).then(handleServerSuccess, handleServerError);
         };
+
 
         ch.updateCustomer = function (updatedCustomer) {
             if (grecaptcha.getResponse()) {
@@ -57,11 +34,42 @@ angular.module('qbhelper').component('customerComponent', {
                     MemberService.updateCustomer(updatedCustomer).then(handleUpdateSuccess, handleServerError);
                     debugger
                     ch.currentCustomer = {};
-                    });
+                });
             } else {
                 $('#serverError').modal('show');
             }
         }
+
+
+        ch.calling = function () {
+            MemberService.calling();
+        }
+
+        function handleUpdateSuccess(res) {
+            console.log(" Update success");
+            ch.message = "Your profile was updated successfully";
+            $('#showMessage').modal('show');
+        }
+
+        function handleServerSuccess(res) {
+            if (res.data) {
+                ch.vform = true;
+                // ch.checked = true;
+                ch.currentCustomer = res.data;
+            } else {
+                console.log(" WRONG PHONE NUMBER ");
+                ch.message = "Sorry, but we do not know this phone number. Please, try again.."
+                $('#showMessage').modal('show');
+            }
+        }
+
+        function handleServerError(err) {
+            console.log("SERVER ERROR ");
+            ch.message = "Sorry, but there is some error. Please, try again.."
+            $('#showMessage').modal('show');
+        }
+
+
 
     }
 });
