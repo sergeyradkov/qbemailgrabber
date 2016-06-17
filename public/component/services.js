@@ -17,15 +17,16 @@ angular.module('qbhelper').
     })
 
     .service('RecaptchaService', function ($http) {
-        return {
-            sendForm: function (item) {
-                return $http({
-                    method: 'POST',
-                    url: '/',
-                    data: item
-                });
-            }
-        }
+        return $http.post('/', item);
+        // return {
+        //     sendForm: function (item) {
+        //         return $http({
+        //             method: 'POST',
+        //             url: '/',
+        //             data: item
+        //         });
+        //     }
+        // }
     })
 
     .service('PhoneService', function () {
