@@ -2,7 +2,7 @@ var http = require('http'),
   express = require('express'),
   app = express(),
   port = process.env.PORT || 8080
-  request = require('request'),
+request = require('request'),
   bodyParser = require('body-parser'),
   qs = require('querystring'),
   util = require('util'),
@@ -26,10 +26,10 @@ app.use(session({ resave: false, saveUninitialized: false, secret: 'smith' }))
 
 config.load('./config/qbconfig.json');
 var consumerKey = config.get('consumerKey'),
-    consumerSecret = config.get('consumerSecret'),
-    ot  = config.get('ot'),
-    ots = config.get('ots'),
-    realmId = config.get('realmId');
+  consumerSecret = config.get('consumerSecret'),
+  ot = config.get('ot'),
+  ots = config.get('ots'),
+  realmId = config.get('realmId');
 
 
 function QBO(req, res, consumerKey, consumerSecret) {
@@ -113,9 +113,9 @@ function updateCuctomerByPhone(customer, callback) {
   delete customer.captchaResponse
   delete customer.captchaUrl
 
-qbo.updateCustomer(customer, function (err, customer) {
+  qbo.updateCustomer(customer, function (err, customer) {
     if (err) console.log(err)
-    if(callback && typeof callback == 'function'){
+    if (callback && typeof callback == 'function') {
       callback(customer)
     }
   })
@@ -169,31 +169,31 @@ var checkCaptcha = function (captchaResponse, cb) {
 
 
 // TWILIO PART
+config.load('./config/twconfig.json');
+var ACCOUNT_SID = config.get('AccountSid'),
+  AUTH_TOKEN = config.get('authToken'),
+  TW_PHONE = config.get('twilioPhone');
 
-var ACCOUNT_SID = 'AC21e725be2493dab86257bb53be063985';
-var AUTH_TOKEN = '937f4c9d827cf744030aa651ef43bc98';
-var myNumber = '+12085059247';
+
+
 var sendNumber = '+12082839080';
 
 
 //require the Twilio module and create a REST client
 var client = require('twilio')(ACCOUNT_SID, AUTH_TOKEN);
 
-app.post('/calling', function(req, res){
+app.post('/calling', function (req, res) {
 
   client.sendMessage({
-
-      to: sendNumber, // Any number Twilio can deliver to
-      from: myNumber, // A number you bought from Twilio and can use for outbound communication
-      body: "Hello Jay" // body of the SMS message
-
-  }, function(err, responseData) {
-
-      if (!err) { 
-          console.log(responseData.from); // outputs "+14506667788"
-          console.log(responseData.body); // outputs "word to your mother."
-      }
-      res.send({err: err, response: responseData})
+    to: sendNumber,
+    from: TW_PHONE,
+    body: "1357"
+  }, function (err, responseData) {
+    if (!err) {
+      console.log(responseData.from); // outputs "+14506667788"
+      console.log(responseData.body); // outputs "word to your mother."
+    }
+    res.send({ err: err, response: responseData })
   });
 })
 
