@@ -17,7 +17,7 @@ angular.module('qbhelper').component('customerComponent', {
             }
         }
 
-// TODO normolize the phone number
+        // TODO normolize the phone number
 
         // find the phone number in QB SQL
         ch.find = function (phoneNumber) {
@@ -41,9 +41,7 @@ angular.module('qbhelper').component('customerComponent', {
         }
 
 
-        ch.calling = function () {
-            MemberService.calling();
-        }
+
 
         function handleUpdateSuccess(res) {
             console.log(" Update success");
@@ -54,8 +52,12 @@ angular.module('qbhelper').component('customerComponent', {
         function handleServerSuccess(res) {
             if (res.data) {
                 ch.vform = true;
+                ch.calling = function () {
+                    MemberService.calling().then(CodeSuccess, handleServerError);
+                }
+
                 // ch.checked = true;
-                ch.currentCustomer = res.data;
+                // ch.currentCustomer = res.data;
             } else {
                 console.log(" WRONG PHONE NUMBER ");
                 ch.message = "Sorry, but we do not know this phone number. Please, try again.."
@@ -63,14 +65,15 @@ angular.module('qbhelper').component('customerComponent', {
             }
         }
 
-        function handleServerError(err) {
-            console.log("SERVER ERROR ");
-            ch.message = "Sorry, but there is some error. Please, try again.."
-            $('#showMessage').modal('show');
+        function CodeSuccess(res) {
+
         }
 
-
-
+        function handleServerError(err) {
+            console.log("SERVER ERROR ");
+            ch.message = "Sorry, but there is some error. Please, try again..";
+            $('#showMessage').modal('show');
+        }
     }
 });
 
