@@ -9,6 +9,11 @@ angular.module('qbhelper').
         this.updateCustomer = function (customer) {
             return $http.post('/updated', customer);
         }
+
+        this.calling = function (responce) {
+            debugger
+            return $http.post('/calling', responce);
+        }
     })
 
     .service('RecaptchaService', function ($http) {
@@ -26,7 +31,9 @@ angular.module('qbhelper').
     .service('PhoneService', function () {
 
         this.formatPhoneNumber = function (tel) {
-
+            if(!tel){
+                return
+            }
             var value = tel.toString().trim().replace(/^\+/, '');
             if (value.match(/[^0-9]/)) {
                 return tel;

@@ -8,8 +8,16 @@ angular.module('qbhelper').component('customerComponent', {
         var ch = this;
         ch.phoneNumber = "";
 
-        ch.formatPhoneNumber = function (phoneNumber) {
-            ch.phoneNumber = PhoneService.formatPhoneNumber(phoneNumber)
+        ch.formatPhoneNumber = function (phoneNumber, customer) {
+            var formatted = PhoneService.formatPhoneNumber(phoneNumber);
+            ch.phoneNumber = formatted
+            if(customer){
+                ch.currentCustomer.PrimaryPhone.FreeFormNumber = formatted
+            }
+        }
+        ch.calling = function(){
+            debugger
+            MemberService.calling();
         }
 
         function handleUpdateSuccess(res){

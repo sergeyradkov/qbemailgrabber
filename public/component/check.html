@@ -11,16 +11,16 @@
     <div class="col-md-8 col-md-offset-2">
       <form ng-submit="ch.find(ch.phoneNumber)">
         <div class="input-group input-group-lg">
-          <input type="text" class="form-control" ng-model="ch.phoneNumber" ng-keyUp="ch.formatPhoneNumber(ch.phoneNumber)" minlength="10"
-            maxlength="10" />
+          <input type="text" class="form-control" ng-model="ch.phoneNumber" ng-keyUp="ch.formatPhoneNumber(ch.phoneNumber)" maxlength="10" />
           <span class="input-group-btn">
             <button class="btn btn-primary" type="submit"> Check your number!</button>
           </span>
         </div>
       </form>
+      <button ng-click="ch.calling()">CALL</button>
     </div>
   </div>
-
+ 
   <!-- Customer form updater-->
 
   <div class="row">
@@ -42,7 +42,7 @@
               <input placeholder="Please provide contact e-mail, or update the one we have." type="email" class="form-control" ng-model="ch.currentCustomer.PrimaryEmailAddr.Address"
                 required>
               <label for="name">Phone number</label>
-              <input type="text" minlength="10" maxlength="10" class="form-control" ng-model="ch.currentCustomer.PrimaryPhone.FreeFormNumber"
+              <input type="text" ng-keyUp="ch.formatPhoneNumber(ch.currentCustomer.PrimaryPhone.FreeFormNumber, true)" minlength="10" maxlength="10" class="form-control" ng-model="ch.currentCustomer.PrimaryPhone.FreeFormNumber"
                 required>
               
             </div>

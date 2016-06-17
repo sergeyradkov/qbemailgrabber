@@ -9,7 +9,6 @@ var http = require('http'),
   cookieParser = require('cookie-parser'),
   session = require('express-session'),
   QuickBooks = require('./index'),
-  // secret = require('./config'),
   captchaUrl = 'https://www.google.com/recaptcha/api/siteverify?secret=6LeWCCETAAAAAGtTk0MKqtHyPEyNZtfRpqND-uV1&response='
 
 // GENERIC EXPRESS CONFIG
@@ -164,30 +163,30 @@ var checkCaptcha = function (captchaResponse, cb) {
 }
 
 
-
 // TWILIO PART
 
-var ACCOUNT_SID = 'AC48148f3f2d267b5bb05f41ba082bdf41';
-var AUTH_TOKEN = 'b2bb51ba7eaf8f7d4bf4d0504efc049d';
-// var myNumber = '+12085059247';
-var myNumber = "+15005550006";
+var ACCOUNT_SID = 'AC21e725be2493dab86257bb53be063985';
+var AUTH_TOKEN = '937f4c9d827cf744030aa651ef43bc98';
+var myNumber = '+12085059247';
 var sendNumber = '+12082839080';
+
 
 //require the Twilio module and create a REST client
 var client = require('twilio')(ACCOUNT_SID, AUTH_TOKEN);
 
 app.post('/calling', function(req, res){
-  //Send an SMS text message
+
   client.sendMessage({
 
-      to: req.body.sendNumber, // Any number Twilio can deliver to
+      to: sendNumber, // Any number Twilio can deliver to
       from: myNumber, // A number you bought from Twilio and can use for outbound communication
-      body: 'Hello word' // body of the SMS message
+      body: req.body.message // body of the SMS message
 
   }, function(err, responseData) { //this function is executed when a response is received from Twilio
 
-      if (!err) { // "err" is an error received during the request, if any
-
+      if (!err) { 
+        
+          // "err" is an error received during the request, if any
           // "responseData" is a JavaScript object containing data received from Twilio.
           // A sample response from sending an SMS message is here (click "JSON" to see how the data appears in JavaScript):
           // http://www.twilio.com/docs/api/rest/sending-sms#example-1
