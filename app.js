@@ -171,21 +171,18 @@ var checkCaptcha = function (captchaResponse, cb) {
 // TWILIO PART
 config.load('./config/twconfig.json');
 var ACCOUNT_SID = config.get('AccountSid'),
-  AUTH_TOKEN = config.get('authToken'),
-  TW_PHONE = config.get('twilioPhone');
-
-
-
-var sendNumber = '+12082839080';
-
+    AUTH_TOKEN = config.get('authToken'),
+    TW_PHONE = config.get('twilioPhone');
 
 //require the Twilio module and create a REST client
 var client = require('twilio')(ACCOUNT_SID, AUTH_TOKEN);
 
-app.post('/calling', function (req, res) {
+app.post('/sendSMS', function (req, res) {
+
+  var sendPhone = req.query.phoneNumber
 
   client.sendMessage({
-    to: sendNumber,
+    to: sendPhone,
     from: TW_PHONE,
     body: "1357"
   }, function (err, responseData) {
