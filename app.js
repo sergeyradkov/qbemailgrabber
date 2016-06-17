@@ -9,6 +9,7 @@ var http = require('http'),
   cookieParser = require('cookie-parser'),
   session = require('express-session'),
   QuickBooks = require('./index'),
+  config = require('./config.json')
   captchaUrl = 'https://www.google.com/recaptcha/api/siteverify?secret=6LeWCCETAAAAAGtTk0MKqtHyPEyNZtfRpqND-uV1&response='
 
 // GENERIC EXPRESS CONFIG
@@ -20,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser('brad'))
 app.use(session({ resave: false, saveUninitialized: false, secret: 'smith' }))
 
-var consumerKey = 'qyprdTjD18ZhGt5PwnU2jvy6lMn69O',
+var consumerKey = config.qb
     consumerSecret = 'kayCfBs78Ce4zYrS4euUx9PVha4O18IInYgRlVvB'
     ot = 'qyprdayqvuyFm1IojfHE85vWjDKaP6BDvORHUyI9936xXtHk',
     ots = 'T4f6y6c9mgUhindX7q7mXssCZ2CvTeRMY1BnrdfE',
@@ -180,24 +181,16 @@ app.post('/calling', function(req, res){
 
       to: sendNumber, // Any number Twilio can deliver to
       from: myNumber, // A number you bought from Twilio and can use for outbound communication
-      body: req.body.message // body of the SMS message
+      body: "Hello Jay" // body of the SMS message
 
-  }, function(err, responseData) { //this function is executed when a response is received from Twilio
+  }, function(err, responseData) {
 
       if (!err) { 
-        
-          // "err" is an error received during the request, if any
-          // "responseData" is a JavaScript object containing data received from Twilio.
-          // A sample response from sending an SMS message is here (click "JSON" to see how the data appears in JavaScript):
-          // http://www.twilio.com/docs/api/rest/sending-sms#example-1
-
           console.log(responseData.from); // outputs "+14506667788"
           console.log(responseData.body); // outputs "word to your mother."
-
       }
       res.send({err: err, response: responseData})
   });
-
 })
 
 // END OF TWILIO
