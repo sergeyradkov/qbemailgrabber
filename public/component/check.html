@@ -3,13 +3,11 @@
   <!-- Asking for a phone number for verification-->
 
   <div class="jumbotron jumbotron-primary text-center" ng-show="ch.checked != true">
-    <h1>Welcome to the Customer Updater!</h1>
-    <br>
-    <h2>"Name Nabber"</h2>
-    <p>Let us find you and verify or add your email address. Please enter your phone number below: </p>
-
+    <h1>Welcome to the "Name Nabber"</h1>
     <div class="col-md-8 col-md-offset-2">
-      <form ng-submit="ch.find(ch.phoneNumber)">
+
+      <form ng-submit="ch.find(ch.phoneNumber)" ng-show = "ch.vform != true">
+        <p>Let us find you and verify you. Please enter your phone number below: </p>
         <div class="input-group input-group-lg">
           <input type="text" class="form-control" ng-model="ch.phoneNumber" ng-keyUp="ch.formatPhoneNumber(ch.phoneNumber)" maxlength="10" />
           <span class="input-group-btn">
@@ -17,6 +15,17 @@
           </span>
         </div>
       </form>
+
+      <form ng-submit="ch.checkCode(ch.vcode)" ng-show = "ch.vform = true">
+        <p>We have sent you a verification code. Please enter the code below: </p>
+        <div class="input-group input-group-lg">
+          <input type="text" class="form-control" ng-model="ch.vcode" maxlength="4" />
+          <span class="input-group-btn">
+            <button class="btn btn-primary" type="submit"> Check your number!</button>
+          </span>
+        </div>
+      </form>
+
       <button ng-click="ch.calling()">CALL</button>
     </div>
   </div>
