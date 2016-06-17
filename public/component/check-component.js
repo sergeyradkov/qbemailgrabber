@@ -66,7 +66,7 @@ angular.module('qbhelper').component('customerComponent', {
         }
 
         function CodeSuccess(res) {
-
+            console.log('CODE SENT');
         }
 
         function handleServerError(err) {
