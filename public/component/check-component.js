@@ -54,7 +54,6 @@ angular.module('qbhelper').component('customerComponent', {
             if (res.data) {
                 ch.vform = true;
                 phoneForSMS = "+1" + ch.phoneNumber.replace (/[^\d]/g, "");
-                debugger
                 sendSMS(phoneForSMS);
                 // ch.currentCustomer = res.data;
                 // ch.checked = true;

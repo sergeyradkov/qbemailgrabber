@@ -178,8 +178,8 @@ var ACCOUNT_SID = config.get('AccountSid'),
 var client = require('twilio')(ACCOUNT_SID, AUTH_TOKEN);
 
 app.post('/sendSMS', function (req, res) {
-
-  var sendPhone = req.query.phoneNumber
+debugger
+  var sendPhone = req;
 
   client.sendMessage({
     to: sendPhone,

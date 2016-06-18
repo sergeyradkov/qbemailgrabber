@@ -12,7 +12,7 @@ angular.module('qbhelper').
 
         this.sendSMS = function (phoneNumber) {
             debugger
-            return $http.post('/sendSMS?phoneNumber=', phoneNumber);
+            return $http.post('/sendSMS', phoneNumber);
         }
     })
 
