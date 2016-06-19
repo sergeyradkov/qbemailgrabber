@@ -21,15 +21,19 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser('brad'))
 app.use(session({ resave: false, saveUninitialized: false, secret: 'smith' }))
 
-
-
-
+// GENERIC KEYS
 config.load('./config/qbconfig.json');
 var consumerKey = config.get('consumerKey'),
-  consumerSecret = config.get('consumerSecret'),
-  ot = config.get('ot'),
-  ots = config.get('ots'),
-  realmId = config.get('realmId');
+    consumerSecret = config.get('consumerSecret'),
+    ot = config.get('ot'),
+    ots = config.get('ots'),
+    realmId = config.get('realmId');
+config.load('./config/twconfig.json');
+var ACCOUNT_SID = config.get('AccountSid'),
+    AUTH_TOKEN = config.get('authToken'),
+    TW_PHONE = config.get('twilioPhone');
+
+    
 
 
 function QBO(req, res, consumerKey, consumerSecret) {
@@ -97,7 +101,6 @@ app.post('/updated', function (req, res) {
   })
 })
 
-
 app.get('/start', function (req, res) {
   console.log('authenticating connection, please wait.....')
   QBO(req, res, consumerKey, consumerSecret)
@@ -145,6 +148,33 @@ function getQbo() {
   return _qbo
 }
 
+// TWILIO PART
+
+
+//require the Twilio module and create a REST client
+
+
+app.post('/sms', function (req, res) {
+  
+  var TW_MES = Math.floor(Math.random() * 9000) + 1000;
+  var sendPhone = "+12082839080";
+  client = require('twilio')(ACCOUNT_SID, AUTH_TOKEN);
+  client.sendMessage({
+    to: sendPhone,
+    from: TW_PHONE,
+    body: TW_MES
+  }, function (err, responseData) {
+    if (!err) {
+      console.log(responseData.from);
+      console.log(responseData.body);
+    }
+    res.send({ err: err, response: TW_MES})
+  });
+
+})
+
+// END OF TWILIO
+
 // THE CAPTURE VERIFICATION PART
 
 app.post('/', function (req, res) {
@@ -167,35 +197,7 @@ var checkCaptcha = function (captchaResponse, cb) {
   })
 }
 
-
-// TWILIO PART
-config.load('./config/twconfig.json');
-var ACCOUNT_SID = config.get('AccountSid'),
-    AUTH_TOKEN = config.get('authToken'),
-    TW_PHONE = config.get('twilioPhone');
-    TW_MES = config.get('TwilioMessage')
-
-//require the Twilio module and create a REST client
-var client = require('twilio')(ACCOUNT_SID, AUTH_TOKEN);
-
-app.post('/sms', function (req, res) {
-
-  var sendPhone = "+12082839080";
-
-  client.sendMessage({
-    to: sendPhone,
-    from: TW_PHONE,
-    body: TW_MES
-  }, function (err, responseData) {
-    if (!err) {
-      console.log(responseData.from);
-      console.log(responseData.body);
-    }
-    res.send({ err: err, response: responseData })
-  });
-})
-
-// END OF TWILIO
+//END OF RECAPTURE
 
 app.listen(port, function () {
   console.log('Express server listening on port ' + app.get('port'))
