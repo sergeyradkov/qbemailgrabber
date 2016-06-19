@@ -7,6 +7,7 @@ angular.module('qbhelper').component('customerComponent', {
 
         var ch = this;
         ch.phoneNumber = "";
+        var code = "";
 
         // formating phone number under the mask
         ch.formatPhoneNumber = function (phoneNumber, customer) {
@@ -16,15 +17,20 @@ angular.module('qbhelper').component('customerComponent', {
                 ch.currentCustomer.PrimaryPhone.FreeFormNumber = formatted
             }
         }
-
-        // TODO normolize the phone number
-
+// TODO normolize the phone number
         // find the phone number in QB SQL
         ch.find = function (phoneNumber) {
             var normalNumber = phoneNumber;//.replace (/[^\d]/g, "");
             MemberService.findMemberByPhone(normalNumber).then(handleServerSuccess, handleServerError);
         };
 
+        ch.checkCode = function(vcode){
+            if (code == vcode) {
+                ch.checked = true;
+            } else {
+//TODO error message
+            }
+        };
 
         ch.updateCustomer = function (updatedCustomer) {
             if (grecaptcha.getResponse()) {
@@ -55,8 +61,6 @@ angular.module('qbhelper').component('customerComponent', {
                 ch.currentCustomer = res.data;
                 phoneForSMS = "+1" + ch.phoneNumber.replace (/[^\d]/g, "");
                 sendSMS(phoneForSMS);
-                // ch.checked = true;
-                
             } else {
                 console.log(" WRONG PHONE NUMBER ");
                 ch.message = "Sorry, but we do not know this phone number. Please, try again.."
@@ -67,8 +71,7 @@ angular.module('qbhelper').component('customerComponent', {
         function CodeSuccess(res) {
             console.log('CODE SENT');
             ch.vform = true;
-            console.log(res.data.response);
-
+            code = res.data.response;
         }
 
         function handleServerError(err) {
