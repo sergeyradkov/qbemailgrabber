@@ -173,22 +173,23 @@ config.load('./config/twconfig.json');
 var ACCOUNT_SID = config.get('AccountSid'),
     AUTH_TOKEN = config.get('authToken'),
     TW_PHONE = config.get('twilioPhone');
+    TW_MES = config.get('TwilioMessage')
 
 //require the Twilio module and create a REST client
 var client = require('twilio')(ACCOUNT_SID, AUTH_TOKEN);
 
-app.post('/sendSMS', function (req, res) {
-debugger
-  var sendPhone = req;
+app.post('/sms', function (req, res) {
+
+  var sendPhone = "+12082839080";
 
   client.sendMessage({
     to: sendPhone,
     from: TW_PHONE,
-    body: "1357"
+    body: TW_MES
   }, function (err, responseData) {
     if (!err) {
-      console.log(responseData.from); // outputs "+14506667788"
-      console.log(responseData.body); // outputs "word to your mother."
+      console.log(responseData.from);
+      console.log(responseData.body);
     }
     res.send({ err: err, response: responseData })
   });

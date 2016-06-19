@@ -53,9 +53,10 @@ angular.module('qbhelper').component('customerComponent', {
         function handleServerSuccess(res) {
             if (res.data) {
                 ch.vform = true;
-                phoneForSMS = "+1" + ch.phoneNumber.replace (/[^\d]/g, "");
+                ch.currentCustomer = res.data;
+debugger
+                phoneForSMS = "+1" + ch.currentCustomer.PrimaryPhone.FreeFormNumber.replace (/[^\d]/g, "");
                 sendSMS(phoneForSMS);
-                // ch.currentCustomer = res.data;
                 // ch.checked = true;
                 
             } else {

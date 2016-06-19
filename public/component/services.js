@@ -10,10 +10,10 @@ angular.module('qbhelper').
             return $http.post('/updated', customer);
         }
 
-        this.sendSMS = function (phoneNumber) {
-            debugger
-            return $http.post('/sendSMS', phoneNumber);
+        this.sendSMS = function (phone) {
+            return $http.post('/sms', phone);
         }
+
     })
 
     .service('RecaptchaService', function ($http) {
