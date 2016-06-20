@@ -1,5 +1,5 @@
 body {
-    background:#193048;
+    background:#f3f8fe;
     height: 100%;
     font-family: Helvetica;
 }
@@ -10,17 +10,26 @@ label {
 }
 
 .panel {
-    -webkit-box-shadow: 0px 0px 15px 2px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 0px 15px 2px rgba(0,0,0,0.75);
-    box-shadow: 0px 0px 15px 2px rgba(0,0,0,0.75);
-    padding: 3px;
+    background-color: #e3eaf3;
 }
+.panel-heading{
+    background-color: #7090ab;
+}
+
 .jumbotron{
     margin-top: 10%;
     padding-bottom: 10%;
-    background-color: #f3f5f8 !important;
+    background-color: #e3eaf3 !important;
 }
 
-.btn.btn-success.pull-right{
+.btn.pull-right{
     margin-top: 7%;
+}
+.btnqb{
+    background-color: #56b349;
+    color: #f3f8fe;
+}
+.btnqb:hover{
+    background-color: #2ca01c;
+    color: #f3f8fe;
 }
