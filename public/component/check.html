@@ -3,11 +3,11 @@
   <!-- Asking for a phone number for verification-->
 
   <div class="jumbotron jumbotron-primary text-center" ng-show="ch.checked != true">
-    <h1>Welcome to the "Name Nabber"</h1>
+    <h1>Welcome to Customer Updater!</h1>
     <div class="col-md-8 col-md-offset-2">
 
       <form ng-submit="ch.find(ch.phoneNumber)" ng-show = "ch.vform != true">
-        <p>Let us find you and verify you. Please enter your phone number below: </p>
+        <h3>Let us find and verify you. Please enter your phone number below: </h3>
         <div class="input-group input-group-lg">
           <input type="text" class="form-control" ng-model="ch.phoneNumber" ng-keyUp="ch.formatPhoneNumber(ch.phoneNumber)" maxlength="10" />
           <span class="input-group-btn">
@@ -17,7 +17,7 @@
       </form>
 
       <form ng-submit="ch.checkCode(ch.vcode)" ng-show = "ch.vform == true">
-        <p>We have sent you a verification code. Please enter the code below: </p>
+        <h3>We have sent you a verification code. Please enter the code below: </h3>
         <div class="input-group input-group-lg">
           <input type="text" class="form-control" ng-model="ch.vcode" maxlength="4" />
           <span class="input-group-btn">
@@ -67,7 +67,7 @@
             </div>
             <div data-size="normal" class="g-recaptcha col-md-6 col-xs-12" data-sitekey="6LeWCCETAAAAAO___dCNPAm95cXfrf9CBukxkMVi"></div>
             <div class="g-recaptcha col-md-6 col-xs-12">
-              <button type="submit" class="btn btn-success pull-right" style="width: 100%">SEND</button>
+              <button type="submit" class="btn btn-success pull-right" style="width: 100%">UPDATE</button>
             </div>
           </form>
         </div>
