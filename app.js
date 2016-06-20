@@ -155,7 +155,8 @@ function getQbo() {
 
 
 app.post('/sms', function (req, res) {
-  
+  var x = req.body;
+  debugger
   var TW_MES = Math.floor(Math.random() * 9000) + 1000;
   var sendPhone = "+12082839080";
   client = require('twilio')(ACCOUNT_SID, AUTH_TOKEN);
