@@ -1,31 +1,44 @@
 <div class="container-fluid">
 
-  <!-- Asking for a phone number for verification-->
+  <!-- Asking for a phone number for verification, update info-->
 
   <div class="jumbotron jumbotron-primary text-center" ng-show="ch.checked != true">
-    <h1>Welcome to Customer Updater!</h1>
-    <div class="col-md-8 col-md-offset-2">
-
-      <form ng-submit="ch.find(ch.phoneNumber)" ng-show="ch.vform != true">
-        <h3>Let us find and verify you. Please enter your phone number below: </h3>
-        <div class="input-group input-group-lg">
-          <input type="text" class="form-control" ng-model="ch.phoneNumber" ng-keyUp="ch.formatPhoneNumber(ch.phoneNumber)" maxlength="10"
-          />
-          <span class="input-group-btn">
-            <button class="btn btn-primary" type="submit"> Check your number!</button>
-          </span>
-        </div>
-      </form>
-
-      <form ng-submit="ch.checkCode(ch.vcode)" ng-show="ch.vform == true">
-        <h3>We have sent you a verification code. Please enter the code below: </h3>
-        <div class="input-group input-group-lg">
-          <input type="text" class="form-control" ng-model="ch.vcode" maxlength="4" />
-          <span class="input-group-btn">
-            <button class="btn btn-primary" type="submit"> Check your number!</button>
-          </span>
-        </div>
-      </form>
+    <div ng-show="ch.vform != true">
+      <h1>Welcome to Customer Updater!</h1>
+      <div class="col-md-8 col-md-offset-2">
+        <form ng-submit="ch.find(ch.phoneNumber)">
+          <h3>Let us find and verify you. Please enter your phone number below: </h3>
+          <div class="input-group input-group-lg">
+            <input type="text" class="form-control" ng-model="ch.phoneNumber" ng-keyUp="ch.formatPhoneNumber(ch.phoneNumber)" maxlength="10"/>
+            <span class="input-group-btn">
+              <button class="btn btn-primary" type="submit"> Check your number!</button>
+            </span>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div ng-show="ch.vform == true">
+      <h1>Welcome to Customer Updater!</h1>
+      <div class="col-md-8 col-md-offset-2">
+        <form ng-submit="ch.checkCode(ch.vcode)">
+          <h3>We have sent you a verification code. Please enter the code below: </h3>
+          <div class="input-group input-group-lg">
+            <input type="text" class="form-control" ng-model="ch.vcode" maxlength="4" />
+            <span class="input-group-btn">
+              <button class="btn btn-primary" type="submit"> Check your number!</button>
+            </span>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div ng-show="ch.vform == 'done'">
+      <h1>Thank You!</h1>
+      <div class="col-md-8 col-md-offset-2">
+        <form ng-submit="ch.checkCode(ch.vcode)">
+          <h3>Your information has been updated successfully.</h3>
+        </form>
+      </div>
+    </div>
     </div>
   </div>
 

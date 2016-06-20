@@ -15,6 +15,7 @@ angular.module('qbhelper').component('customerComponent', {
                 ch.currentCustomer.PrimaryPhone.FreeFormNumber = formatted
             }
         }
+
         // TODO normolize the phone number
         // find the phone number in QB SQL
         ch.find = function (phoneNumber) {
@@ -50,7 +51,7 @@ angular.module('qbhelper').component('customerComponent', {
         //PROFILE IS UPDATED
         function handleUpdateSuccess(res) {
             console.log(" Update success");
-            showMessage("Your profile was updated successfully");
+            ch.vform = "done";
         }
 
         function handleServerSuccess(res) {
