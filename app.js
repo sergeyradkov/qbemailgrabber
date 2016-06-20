@@ -155,13 +155,12 @@ function getQbo() {
 
 
 app.post('/sms', function (req, res) {
-  var x = req.body;
-  debugger
+
+  var TW_SN = "+1" + req.body.PrimaryPhone.FreeFormNumber.replace (/[^\d]/g, ""); // customer number for sms
   var TW_MES = Math.floor(Math.random() * 9000) + 1000;
-  var sendPhone = "+12082839080";
   client = require('twilio')(ACCOUNT_SID, AUTH_TOKEN);
   client.sendMessage({
-    to: sendPhone,
+    to: TW_SN,
     from: TW_PHONE,
     body: TW_MES
   }, function (err, responseData) {

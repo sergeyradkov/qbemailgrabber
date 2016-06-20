@@ -10,9 +10,9 @@ angular.module('qbhelper').
             return $http.post('/updated', customer);
         }
 
-// HOW TO PUSH PHONE NUMBER TO SMS SENDING???
-        this.sendSMS = function (phone) {
-            return $http.post('/sms', phone);
+        this.sendSMS = function (customer) {
+            debugger
+            return $http.post('/sms', customer);
         }
     })
 
