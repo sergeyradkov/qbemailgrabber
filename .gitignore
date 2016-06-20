@@ -1,0 +1,4 @@
+bower_components/
+public/bower_components/
+node_modules/
+secrets/
