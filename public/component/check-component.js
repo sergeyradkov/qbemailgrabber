@@ -15,38 +15,39 @@ angular.module('qbhelper').component('customerComponent', {
                 ch.currentCustomer.PrimaryPhone.FreeFormNumber = formatted
             }
         }
-// TODO normolize the phone number
+        // TODO normolize the phone number
         // find the phone number in QB SQL
         ch.find = function (phoneNumber) {
             var normalNumber = phoneNumber;//.replace (/[^\d]/g, "");
             MemberService.findMemberByPhone(normalNumber).then(handleServerSuccess, handleServerError);
         };
 
-
-
+        // UPDATING THE CUSTOMER INFORMATION
         ch.updateCustomer = function (updatedCustomer) {
-            if (grecaptcha.getResponse()) {
-                updatedCustomer.captchaResponse = grecaptcha.getResponse();
-                RecaptchaService.sendForm().then(function (response) {
-                    window.response = response.data;
-                    MemberService.updateCustomer(updatedCustomer).then(handleUpdateSuccess, handleServerError);
-                    ch.currentCustomer = {};
-                });
-            } else {
-                $('#serverError').modal('show');
-            }
+            // if (grecaptcha.getResponse()) {
+            //     updatedCustomer.captchaResponse = grecaptcha.getResponse();
+            //     RecaptchaService.sendForm().then(function (response) {
+            //         window.response = response.data;
+            MemberService.updateCustomer(updatedCustomer).then(handleUpdateSuccess, handleServerError);
+            ch.currentCustomer = {};
+            //     });
+            // } else {
+            //     $('#serverError').modal('show');
+            // }
         }
 
-        function sendSMS (customer){
+        // SEND SMS FOR PHONE VERIFICATION
+        function sendSMS(customer) {
             debugger
             MemberService.sendSMS(customer).then(CodeSuccess, handleServerError);
         }
-
-        function showMessage (message) {
+        // POP-UP MESSAGING
+        function showMessage(message) {
             ch.message = message;
             $('#showMessage').modal('show');
         }
 
+        //PROFILE IS UPDATED
         function handleUpdateSuccess(res) {
             console.log(" Update success");
             showMessage("Your profile was updated successfully");
@@ -66,14 +67,14 @@ angular.module('qbhelper').component('customerComponent', {
             console.log('CODE SENT');
             ch.vform = true;
             var code = res.data.response;
-            ch.checkCode = function(vcode){
-            if (code == vcode) {
-                ch.checked = true;
-            } else {
-            console.log("WRONG SMS CODE");
-            showMessage("Sorry, but it is wrong code. Please, try again..")
-            }
-        };
+            ch.checkCode = function (vcode) {
+                if (code == vcode) {
+                    ch.checked = true;
+                } else {
+                    console.log("WRONG SMS CODE");
+                    showMessage("Sorry, but it is wrong code. Please, try again..")
+                }
+            };
         }
 
         function handleServerError(err) {
