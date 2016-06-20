@@ -41,7 +41,6 @@ angular.module('qbhelper').component('customerComponent', {
 
         // SEND SMS FOR PHONE VERIFICATION
         function sendSMS(customer) {
-            debugger
             MemberService.sendSMS(customer).then(CodeSuccess, handleServerError);
         }
         // POP-UP MESSAGING

@@ -11,7 +11,6 @@ angular.module('qbhelper').
         }
 
         this.sendSMS = function (customer) {
-            debugger
             return $http.post('/sms', customer);
         }
     })
