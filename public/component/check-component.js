@@ -6,6 +6,8 @@ angular.module('qbhelper').component('customerComponent', {
     controller: function ($scope, $state, MemberService, PhoneService, RecaptchaService) {
 
         var ch = this;
+        ch.checked = false;
+        ch.vform = 1;
 
         // formating phone number under the mask
         ch.formatPhoneNumber = function (phoneNumber, customer) {
@@ -51,7 +53,8 @@ angular.module('qbhelper').component('customerComponent', {
         //PROFILE IS UPDATED
         function handleUpdateSuccess(res) {
             console.log(" Update success");
-            ch.vform = "done";
+            ch.checked = false;
+            ch.vform = 3;
         }
 
         function handleServerSuccess(res) {
@@ -66,7 +69,7 @@ angular.module('qbhelper').component('customerComponent', {
 
         function CodeSuccess(res) {
             console.log('CODE SENT');
-            ch.vform = true;
+            ch.vform = 2;
             var code = res.data.response;
             ch.checkCode = function (vcode) {
                 if (code == vcode) {
