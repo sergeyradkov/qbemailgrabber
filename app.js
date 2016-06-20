@@ -10,10 +10,10 @@ request = require('request'),
   session = require('express-session'),
   QuickBooks = require('./index'),
   config = require('config-json'),
-  captchaUrl = 'https://www.google.com/recaptcha/api/siteverify?secret=6LeWCCETAAAAAGtTk0MKqtHyPEyNZtfRpqND-uV1&response='
+  // captchaUrl = 'https://www.google.com/recaptcha/api/siteverify?secret=6LeWCCETAAAAAGtTk0MKqtHyPEyNZtfRpqND-uV1&response='
 
-// GENERIC EXPRESS CONFIG
-app.use(express.static(__dirname + '/public'))
+  // GENERIC EXPRESS CONFIG
+  app.use(express.static(__dirname + '/public'))
 app.set('port', port)
 app.set('views', 'views')
 app.use(bodyParser.json())
@@ -24,16 +24,16 @@ app.use(session({ resave: false, saveUninitialized: false, secret: 'smith' }))
 // GENERIC KEYS
 config.load('./secrets/qbconfig.json');
 var consumerKey = config.get('consumerKey'),
-    consumerSecret = config.get('consumerSecret'),
-    ot = config.get('ot'),
-    ots = config.get('ots'),
-    realmId = config.get('realmId');
+  consumerSecret = config.get('consumerSecret'),
+  ot = config.get('ot'),
+  ots = config.get('ots'),
+  realmId = config.get('realmId');
 config.load('./secrets/twconfig.json');
 var ACCOUNT_SID = config.get('AccountSid'),
-    AUTH_TOKEN = config.get('authToken'),
-    TW_PHONE = config.get('twilioPhone');
+  AUTH_TOKEN = config.get('authToken'),
+  TW_PHONE = config.get('twilioPhone');
 
-    
+
 
 
 function QBO(req, res, consumerKey, consumerSecret) {
@@ -156,7 +156,7 @@ function getQbo() {
 
 app.post('/sms', function (req, res) {
 
-  var TW_SN = "+1" + req.body.PrimaryPhone.FreeFormNumber.replace (/[^\d]/g, ""); // customer number for sms
+  var TW_SN = "+1" + req.body.PrimaryPhone.FreeFormNumber.replace(/[^\d]/g, ""); // customer number for sms
   var TW_MES = Math.floor(Math.random() * 9000) + 1000;
   client = require('twilio')(ACCOUNT_SID, AUTH_TOKEN);
   client.sendMessage({
@@ -168,36 +168,36 @@ app.post('/sms', function (req, res) {
       console.log(responseData.from);
       console.log(responseData.body);
     }
-    res.send({ err: err, response: TW_MES})
+    res.send({ err: err, response: TW_MES })
   });
 
 })
 
 // END OF TWILIO
 
-// THE CAPTURE VERIFICATION PART
+// // THE CAPTURE VERIFICATION PART
 
-app.post('/', function (req, res) {
-  checkCaptcha(req.body.captchaResponse, function (response) {
-    if (response.success) {
-      res.send('WOOT! you are not a robot')
-    } else {
-      res.send('BAD! you are a robot')
-    }
-  })
-})
+// app.post('/', function (req, res) {
+//   checkCaptcha(req.body.captchaResponse, function (response) {
+//     if (response.success) {
+//       res.send('WOOT! you are not a robot')
+//     } else {
+//       res.send('BAD! you are a robot')
+//     }
+//   })
+// })
 
-var checkCaptcha = function (captchaResponse, cb) {
-  request.get(captchaUrl + captchaResponse, function (err, response, body) {
-    if (err) {
-      console.log('error: ', err)
-    } else {
-      return cb(JSON.parse(body))
-    }
-  })
-}
+// var checkCaptcha = function (captchaResponse, cb) {
+//   request.get(captchaUrl + captchaResponse, function (err, response, body) {
+//     if (err) {
+//       console.log('error: ', err)
+//     } else {
+//       return cb(JSON.parse(body))
+//     }
+//   })
+// }
 
-//END OF RECAPTURE
+// //END OF RECAPTURE
 
 app.listen(port, function () {
   console.log('Express server listening on port ' + app.get('port'))
