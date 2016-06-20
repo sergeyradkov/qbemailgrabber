@@ -1,3 +1,9 @@
+@font-face {
+    font-family: 'Helvetica Neue LT Std 45 Light';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Helvetica Neue LT Std 45 Light'), url('/app/HelveticaNeue.otf');
+}
 body {
     background:#193048;
     height: 100%;
@@ -11,12 +17,6 @@ p, div {
     font-weight:normal;
 }
 
-@font-face {
-    font-family: 'Helvetica Neue LT Std 45 Light';
-    font-style: normal;
-    font-weight: normal;
-    src: local('Helvetica Neue LT Std 45 Light'), url('app/HelveticaNeue.otf');
-}
 
 label {
     margin: 10px 0;
