@@ -6,8 +6,8 @@ angular.module('qbhelper').component('customerComponent', {
     controller: function ($scope, $state, MemberService, PhoneService, RecaptchaService) {
 
         var ch = this;
-        ch.phoneNumber = "";
-        var code = "";
+        ch.checked = false;
+        ch.vform = 1;
 
         // formating phone number under the mask
         ch.formatPhoneNumber = function (phoneNumber, customer) {
@@ -17,67 +17,72 @@ angular.module('qbhelper').component('customerComponent', {
                 ch.currentCustomer.PrimaryPhone.FreeFormNumber = formatted
             }
         }
-// TODO normolize the phone number
+
+        // TODO normolize the phone number
         // find the phone number in QB SQL
         ch.find = function (phoneNumber) {
             var normalNumber = phoneNumber;//.replace (/[^\d]/g, "");
             MemberService.findMemberByPhone(normalNumber).then(handleServerSuccess, handleServerError);
         };
 
-        ch.checkCode = function(vcode){
-            if (code == vcode) {
-                ch.checked = true;
-            } else {
-//TODO error message
-            }
-        };
-
+        // UPDATING THE CUSTOMER INFORMATION
         ch.updateCustomer = function (updatedCustomer) {
-            if (grecaptcha.getResponse()) {
-                updatedCustomer.captchaResponse = grecaptcha.getResponse();
-                RecaptchaService.sendForm().then(function (response) {
-                    window.response = response.data;
-                    MemberService.updateCustomer(updatedCustomer).then(handleUpdateSuccess, handleServerError);
-                    debugger
-                    ch.currentCustomer = {};
-                });
-            } else {
-                $('#serverError').modal('show');
-            }
+            // if (grecaptcha.getResponse()) {
+            //     updatedCustomer.captchaResponse = grecaptcha.getResponse();
+            //     RecaptchaService.sendForm().then(function (response) {
+            //         window.response = response.data;
+            MemberService.updateCustomer(updatedCustomer).then(handleUpdateSuccess, handleServerError);
+            ch.currentCustomer = {};
+            //     });
+            // } else {
+            //     $('#serverError').modal('show');
+            // }
         }
 
-        function sendSMS (phone){
-            MemberService.sendSMS(phone).then(CodeSuccess, handleServerError);
+        // SEND SMS FOR PHONE VERIFICATION
+        function sendSMS(customer) {
+            MemberService.sendSMS(customer).then(CodeSuccess, handleServerError);
+        }
+        // POP-UP MESSAGING
+        function showMessage(message) {
+            ch.message = message;
+            $('#showMessage').modal('show');
         }
 
+        //PROFILE IS UPDATED
         function handleUpdateSuccess(res) {
             console.log(" Update success");
-            ch.message = "Your profile was updated successfully";
-            $('#showMessage').modal('show');
+            ch.checked = false;
+            ch.vform = 3;
         }
 
         function handleServerSuccess(res) {
             if (res.data) {
                 ch.currentCustomer = res.data;
-                phoneForSMS = "+1" + ch.phoneNumber.replace (/[^\d]/g, "");
-                sendSMS(phoneForSMS);
+                sendSMS(ch.currentCustomer);
             } else {
                 console.log(" WRONG PHONE NUMBER ");
-                ch.message = "Sorry, but we do not know this phone number. Please, try again.."
-                $('#showMessage').modal('show');
+                showMessage("Sorry, but we do not know this phone number. Please, try again..");
             }
         }
 
         function CodeSuccess(res) {
             console.log('CODE SENT');
-            ch.vform = true;
-            code = res.data.response;
+            ch.vform = 2;
+            var code = res.data.response;
+            ch.checkCode = function (vcode) {
+                if (code == vcode) {
+                    ch.checked = true;
+                } else {
+                    console.log("WRONG SMS CODE");
+                    showMessage("Sorry, but it is wrong code. Please, try again..")
+                }
+            };
         }
 
         function handleServerError(err) {
             console.log("SERVER ERROR ");
-            ch.message = "Sorry, but there is some error. Please, try again..";
-            $('#showMessage').modal('show');
+            showMessage("Sorry, but there is some error. Please, try again..");
         }
     }
 });

@@ -3,7 +3,6 @@ angular.module('qbhelper').
     service('MemberService', function ($http) {
 
         this.findMemberByPhone = function (phoneNumber) {
-            debugger
             return $http.get('/lookup?phoneNumber=' + phoneNumber)
         }
 
@@ -11,9 +10,8 @@ angular.module('qbhelper').
             return $http.post('/updated', customer);
         }
 
-// HOW TO PUSH PHONE NUMBER TO SMS SENDING???
-        this.sendSMS = function (phone) {
-            return $http.post('/sms');
+        this.sendSMS = function (customer) {
+            return $http.post('/sms', customer);
         }
     })
 
