@@ -3,9 +3,8 @@ angular.module('qbhelper').
     service('MemberService', function ($http) {
 
         this.findMemberByPhone = function (phoneNumber) {
-            return $http.get('/lookup?phoneNumber=' + phoneNumber)
+            return $http.get('/lookup'+location.search+'&phoneNumber='+phoneNumber)
         }
-
         this.updateCustomer = function (customer) {
             return $http.post('/updated', customer);
         }

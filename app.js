@@ -28,15 +28,27 @@ var store = new JSData.DS();
 var adapter = new DSNedbAdapter();
 store.registerAdapter('nedb', adapter, { default: true });
 
-var User = store.defineResource({
+var Users = store.defineResource({
     name: 'user',
-    filepath: 'dots/users.db'
+    filepath: __dirname+'/dots/users.db'
 })
 
 var TwilioAccount = store.defineResource({
     name: 'twilioaccount',
-    filepath: 'dots/twilio.db'
+    filepath: __dirname+'/dots/twilio.db'
 })
+
+// Users.create({
+// "id":"ab23da75-db92-46d5-ac93-14fe0c529a1d",
+// "company":"SandBox",
+// "consumerKey":"qyprdTjD18ZhGt5PwnU2jvy6lMn69O",
+// "consumerSecret": "kayCfBs78Ce4zYrS4euUx9PVha4O18IInYgRlVvB",
+// "ot": "qyprdayqvuyFm1IojfHE85vWjDKaP6BDvORHUyI9936xXtHk",
+// "ots":"T4f6y6c9mgUhindX7q7mXssCZ2CvTeRMY1BnrdfE",
+// "realmId":"123145721128202",
+// })
+
+
 
     // getSports = function(req, res, next) {
     //     if (req.params.id) {
@@ -112,7 +124,7 @@ app.get('/callback', function (req, res) {
 })
 
 app.get('/lookup', function (req, res) {
-  findCustomerByPhone(req.query.phoneNumber, function (customer) {
+  findCustomerByPhone(req.query.compId, req.query.phoneNumber, function (customer) {
     res.send(customer)
   })
 })
@@ -144,13 +156,15 @@ function updateCuctomerByPhone(customer, callback) {
   })
 }
 
-function findCustomerByPhone(phone, callback) {
-  var qbo = getQbo()
+function findCustomerByPhone(id, phone, callback) {
+  getQbo(id, function(qbo){
+
   qbo.findCustomers([
     { field: 'fetchAll', value: true },
   ], function (e, res) {
-    var customer = res.QueryResponse.Customer.find(x => x.PrimaryPhone && x.PrimaryPhone.FreeFormNumber.replace(/[^\d]/g, "") == phone.replace(/[^\d]/g, ""));
-    callback(customer);
+      var customer = res.QueryResponse.Customer.find(x => x.PrimaryPhone && x.PrimaryPhone.FreeFormNumber.replace(/[^\d]/g, "") == phone.replace(/[^\d]/g, ""));
+      callback(customer);
+    })
   })
 }
 
@@ -162,23 +176,21 @@ app.post('/users', function(req, res){
 
 
 var _qbo
-function getQbo(req) {
+function getQbo(id,cb) {
+  var compId = id;
+  // var compId = "ab23da75-db92-46d5-ac93-14fe0c529a1d";
 
-debugger
-  // var compId = req.query.compId;
-  var compId = "ab23da75-db92-46d5-ac93-14fe0c529a1d";
-
-  User.find(compId).then(function(user){
+  Users.find(compId).then(function(user){
   var consumerKey = user.consumerKey;
   var consumerSecret = user.consumerSecret;
   //get ConsumerKey and Secret from compId
 
-  if (!_qbo) {
+  
     _qbo = new QuickBooks(consumerKey, consumerSecret,ot,ots, realmId,
       true, // use the Sandbox
       true) // turn debugging on
-  }
-  return _qbo
+  
+    cb(_qbo)
   })
 }
 
