@@ -24,9 +24,32 @@ app.use(session({ resave: false, saveUninitialized: false, secret: 'smith' }))
 
 // JS DATA DB
 
-var db = new JSData.DS();
+var store = new JSData.DS();
 var adapter = new DSNedbAdapter();
-db.registerAdapter('nedb', adapter, { default: true });
+store.registerAdapter('nedb', adapter, { default: true });
+
+var User = store.defineResource({
+    name: 'user',
+    filepath: path.join(__dirname, '/dots/users.db')
+})
+
+var TwilioAccount = store.defineResource({
+    name: 'twilioaccount',
+    filepath: path.join(__dirname, '/dots/twilio.db')
+})
+
+    // getSports = function(req, res, next) {
+    //     if (req.params.id) {
+    //         getSport(req.params.id).then(function(sport) {
+    //             return res.json(sport)
+    //         })
+    //     } else {
+    //         getSports(req.query).then(function(sports) {
+    //             return res.json(sports);
+    //         })
+    //     }
+    // }
+
 
 
 
@@ -146,14 +169,33 @@ function findCustomerByPhone(phone, callback) {
   })
 }
 
+app.post('/users', function(req, res){
+  Users.create(req.body.user).then(function(user){
+    res.send({message: `Successfully created your account. Please direct all of your customers to blah.com/?compId=`+ user.id})
+  })
+})
+
+
 var _qbo
-function getQbo() {
+function getQbo(req) {
+
+
+  var compId = req.query.compId;
+
+  User.find(compId).then(function(user){
+
+
+  var consumerKey = user.consumerKey;
+  var consumerSecret = user.consumerSecret;
+  //get ConsumerKey and Secret from compId
+
   if (!_qbo) {
     _qbo = new QuickBooks(consumerKey, consumerSecret,ot,ots, realmId,
       true, // use the Sandbox
       true) // turn debugging on
   }
   return _qbo
+  })
 }
 
 // TWILIO PART
