@@ -1,2 +1,2 @@
-# QB Email Grabber
-an application to read a QB customer and update email info and customer information.
+# QuickBooks Customer form helper
+an web application which the main aim to help to update customer information from outside of QB

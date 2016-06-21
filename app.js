@@ -11,7 +11,6 @@ var http = require('http'),
     QuickBooks = require('./index'),
     config = require('config-json'),
     JSData = require('js-data'),
-    DSRedisAdapter = require('js-data-redis');
 
   // GENERIC EXPRESS CONFIG
 app.use(express.static(__dirname + '/public'))
@@ -159,21 +158,6 @@ app.post('/sms', function (req, res) {
     }
     res.send({ err: err, response: TW_MES })
   });
-})
-
-// JSData part
-var store = new JSData.DS();
-store.registerAdapter('redis', new DSRedisAdapter(), { default: true });
-
-// simplest model definition
-var User = store.defineResource('user');
-
-User.find(1).then(function (user) {
-  user; // { id: 1, name: 'John' }
-});
-
-app.listen(port, function () {
-  console.log('Express server listening on port ' + app.get('port'))
 })
 
 
