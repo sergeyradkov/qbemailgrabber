@@ -137,11 +137,7 @@ function findCustomerByPhone(phone, callback) {
 var _qbo
 function getQbo() {
   if (!_qbo) {
-    _qbo = new QuickBooks(consumerKey,
-      consumerSecret,
-      ot,
-      ots,
-      realmId,
+    _qbo = new QuickBooks(consumerKey, consumerSecret,ot,ots, realmId,
       true, // use the Sandbox
       true) // turn debugging on
   }
@@ -149,7 +145,6 @@ function getQbo() {
 }
 
 // TWILIO PART
-
 app.post('/sms', function (req, res) {
   var TW_SN = "+1" + req.body.PrimaryPhone.FreeFormNumber.replace(/[^\d]/g, ""); // customer number for sms
   var TW_MES = Math.floor(Math.random() * 9000) + 1000;
