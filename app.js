@@ -10,7 +10,7 @@ var http = require('http'),
     session = require('express-session'),
     QuickBooks = require('./index'),
     config = require('config-json'),
-    JSData = require('js-data'),
+    // JSData = require('js-data'),
 
   // GENERIC EXPRESS CONFIG
 app.use(express.static(__dirname + '/public'))
