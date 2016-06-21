@@ -9,8 +9,10 @@ var http = require('http'),
   cookieParser = require('cookie-parser'),
   session = require('express-session'),
   QuickBooks = require('./index'),
-  config = require('config-json'),
-  
+  JSData = require('js-data'),
+	DSNedbAdapter = require('js-data-nedb'),
+  config = require('config-json');
+
   // GENERIC EXPRESS CONFIG
 app.use(express.static(__dirname + '/public'))
 app.set('port', port)
@@ -19,6 +21,16 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser('brad'))
 app.use(session({ resave: false, saveUninitialized: false, secret: 'smith' }))
+
+// JS DATA DB
+
+var db = new JSData.DS();
+var adapter = new DSNedbAdapter();
+db.registerAdapter('nedb', adapter, { default: true });
+
+
+
+
 
 // GENERIC KEYS
 config.load('./dots/qbconfig.json');
