@@ -30,12 +30,12 @@ store.registerAdapter('nedb', adapter, { default: true });
 
 var User = store.defineResource({
     name: 'user',
-    filepath: path.join(__dirname, '/dots/users.db')
+    filepath: 'dots/users.db'
 })
 
 var TwilioAccount = store.defineResource({
     name: 'twilioaccount',
-    filepath: path.join(__dirname, '/dots/twilio.db')
+    filepath: 'dots/twilio.db'
 })
 
     // getSports = function(req, res, next) {
@@ -49,10 +49,6 @@ var TwilioAccount = store.defineResource({
     //         })
     //     }
     // }
-
-
-
-
 
 
 // GENERIC KEYS
@@ -112,15 +108,6 @@ app.get('/callback', function (req, res) {
       postBody.oauth.realmId,
       true, // use the Sandbox
       true) // turn debugging on
-
-    // // test out account access
-    // qbo.findAccounts(function (_, accounts) {
-    //   accounts.QueryResponse.Account.forEach(function (account) {
-    //     console.log('QBO is Ready')
-    //   })
-    //   res.redirect('/ready')
-    // })
-
   })
 })
 
@@ -136,10 +123,10 @@ app.post('/updated', function (req, res) {
   })
 })
 
-app.get('/start', function (req, res) {
-  console.log('authenticating connection, please wait.....')
-  QBO(req, res, consumerKey, consumerSecret)
-})
+// app.get('/start', function (req, res) {
+//   console.log('authenticating connection, please wait.....')
+//   QBO(req, res, consumerKey, consumerSecret)
+// })
 
 app.get('/ready', function (req, res) {
   res.sendFile(__dirname + '/public/index.html')
@@ -148,8 +135,6 @@ app.get('/ready', function (req, res) {
 function updateCuctomerByPhone(customer, callback) {
 
   var qbo = getQbo();
-  // delete customer.captchaResponse
-  // delete customer.captchaUrl
 
   qbo.updateCustomer(customer, function (err, customer) {
     if (err) console.log(err)
@@ -179,12 +164,11 @@ app.post('/users', function(req, res){
 var _qbo
 function getQbo(req) {
 
-
-  var compId = req.query.compId;
+debugger
+  // var compId = req.query.compId;
+  var compId = "ab23da75-db92-46d5-ac93-14fe0c529a1d";
 
   User.find(compId).then(function(user){
-
-
   var consumerKey = user.consumerKey;
   var consumerSecret = user.consumerSecret;
   //get ConsumerKey and Secret from compId
