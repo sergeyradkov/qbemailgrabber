@@ -1,16 +1,18 @@
 var http = require('http'),
-  express = require('express'),
-  app = express(),
-  port = process.env.PORT || 8080
-  request = require('request'),
-  bodyParser = require('body-parser'),
-  qs = require('querystring'),
-  util = require('util'),
-  cookieParser = require('cookie-parser'),
-  session = require('express-session'),
-  QuickBooks = require('./index'),
-  config = require('config-json'),
-  
+    express = require('express'),
+    app = express(),
+    port = process.env.PORT || 8080
+    request = require('request'),
+    bodyParser = require('body-parser'),
+    qs = require('querystring'),
+    util = require('util'),
+    cookieParser = require('cookie-parser'),
+    session = require('express-session'),
+    QuickBooks = require('./index'),
+    config = require('config-json'),
+    JSData = require('js-data'),
+    DSRedisAdapter = require('js-data-redis');
+
   // GENERIC EXPRESS CONFIG
 app.use(express.static(__dirname + '/public'))
 app.set('port', port)
@@ -158,11 +160,44 @@ app.post('/sms', function (req, res) {
     res.send({ err: err, response: TW_MES })
   });
 })
-// END OF TWILIO
+
+// JSData part
+var store = new JSData.DS();
+store.registerAdapter('redis', new DSRedisAdapter(), { default: true });
+
+// simplest model definition
+var User = store.defineResource('user');
+
+User.find(1).then(function (user) {
+  user; // { id: 1, name: 'John' }
+});
 
 app.listen(port, function () {
   console.log('Express server listening on port ' + app.get('port'))
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // // THE CAPTURE VERIFICATION PART
