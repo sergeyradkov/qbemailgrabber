@@ -1,7 +1,7 @@
 angular.module('qbhelper').component('customerComponent', {
     templateUrl: '/component/check.html',
     controllerAs: 'ch',
-    controller: function ($scope, $state, MemberService, PhoneService, RecaptchaService) {
+    controller: function ($state, MemberService, PhoneService) {
 
         var ch = this;
         ch.checked = false;

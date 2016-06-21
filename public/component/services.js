@@ -20,12 +20,11 @@ angular.module('qbhelper').
         this.formatPhoneNumber = function (tel) {
             if(!tel){
                 return
-            }
+            };
             var value = tel.toString().trim().replace(/^\+/, '');
             if (value.match(/[^0-9]/)) {
                 return tel;
-            }
-
+            };
             var country, city, number;
             switch (value.length) {
                 case 10: // +1PPP####### -> C (PPP) ###-####

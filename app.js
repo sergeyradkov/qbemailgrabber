@@ -1,17 +1,16 @@
 var http = require('http'),
-    express = require('express'),
-    app = express(),
-    port = process.env.PORT || 8080
-    request = require('request'),
-    bodyParser = require('body-parser'),
-    qs = require('querystring'),
-    util = require('util'),
-    cookieParser = require('cookie-parser'),
-    session = require('express-session'),
-    QuickBooks = require('./index'),
-    config = require('config-json'),
-    // JSData = require('js-data'),
-
+  express = require('express'),
+  app = express(),
+  port = process.env.PORT || 8080
+  request = require('request'),
+  bodyParser = require('body-parser'),
+  qs = require('querystring'),
+  util = require('util'),
+  cookieParser = require('cookie-parser'),
+  session = require('express-session'),
+  QuickBooks = require('./index'),
+  config = require('config-json'),
+  
   // GENERIC EXPRESS CONFIG
 app.use(express.static(__dirname + '/public'))
 app.set('port', port)
@@ -34,7 +33,7 @@ var ACCOUNT_SID = config.get('AccountSid'),
   TW_PHONE = config.get('twilioPhone');
 
 
-//QB part
+
 
 function QBO(req, res, consumerKey, consumerSecret) {
   var postBody = {
@@ -66,7 +65,11 @@ app.get('/callback', function (req, res) {
     }
   }
   request.post(postBody, function (e, r, data) {
-    var accessToken = qs.parse(data);
+    var accessToken = qs.parse(data)
+    // console.log(accessToken)
+    // console.log(postBody.oauth.realmId)
+
+    // save the access token somewhere on behalf of the logged in user
     qbo = new QuickBooks(consumerKey,
       consumerSecret,
       accessToken.oauth_token,
@@ -74,6 +77,15 @@ app.get('/callback', function (req, res) {
       postBody.oauth.realmId,
       true, // use the Sandbox
       true) // turn debugging on
+
+    // // test out account access
+    // qbo.findAccounts(function (_, accounts) {
+    //   accounts.QueryResponse.Account.forEach(function (account) {
+    //     console.log('QBO is Ready')
+    //   })
+    //   res.redirect('/ready')
+    // })
+
   })
 })
 
@@ -101,6 +113,9 @@ app.get('/ready', function (req, res) {
 function updateCuctomerByPhone(customer, callback) {
 
   var qbo = getQbo();
+  // delete customer.captchaResponse
+  // delete customer.captchaUrl
+
   qbo.updateCustomer(customer, function (err, customer) {
     if (err) console.log(err)
     if (callback && typeof callback == 'function') {
@@ -114,7 +129,7 @@ function findCustomerByPhone(phone, callback) {
   qbo.findCustomers([
     { field: 'fetchAll', value: true },
   ], function (e, res) {
-    var customer = res.QueryResponse.Customer.find(x => x.PrimaryPhone && x.PrimaryPhone.FreeFormNumber == phone);
+    var customer = res.QueryResponse.Customer.find(x => x.PrimaryPhone && x.PrimaryPhone.FreeFormNumber.replace(/[^\d]/g, "") == phone.replace(/[^\d]/g, ""));
     callback(customer);
   })
 }
@@ -143,3 +158,9 @@ app.post('/sms', function (req, res) {
     res.send({ err: err, response: TW_MES })
   });
 })
+// END OF TWILIO
+
+app.listen(port, function () {
+  console.log('Express server listening on port ' + app.get('port'))
+})
+
