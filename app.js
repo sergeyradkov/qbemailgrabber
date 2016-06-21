@@ -34,7 +34,7 @@ var ACCOUNT_SID = config.get('AccountSid'),
   TW_PHONE = config.get('twilioPhone');
 
 
-
+//QB part
 
 function QBO(req, res, consumerKey, consumerSecret) {
   var postBody = {
@@ -66,11 +66,7 @@ app.get('/callback', function (req, res) {
     }
   }
   request.post(postBody, function (e, r, data) {
-    var accessToken = qs.parse(data)
-    // console.log(accessToken)
-    // console.log(postBody.oauth.realmId)
-
-    // save the access token somewhere on behalf of the logged in user
+    var accessToken = qs.parse(data);
     qbo = new QuickBooks(consumerKey,
       consumerSecret,
       accessToken.oauth_token,
@@ -78,15 +74,6 @@ app.get('/callback', function (req, res) {
       postBody.oauth.realmId,
       true, // use the Sandbox
       true) // turn debugging on
-
-    // // test out account access
-    // qbo.findAccounts(function (_, accounts) {
-    //   accounts.QueryResponse.Account.forEach(function (account) {
-    //     console.log('QBO is Ready')
-    //   })
-    //   res.redirect('/ready')
-    // })
-
   })
 })
 
@@ -114,9 +101,6 @@ app.get('/ready', function (req, res) {
 function updateCuctomerByPhone(customer, callback) {
 
   var qbo = getQbo();
-  // delete customer.captchaResponse
-  // delete customer.captchaUrl
-
   qbo.updateCustomer(customer, function (err, customer) {
     if (err) console.log(err)
     if (callback && typeof callback == 'function') {
@@ -159,50 +143,3 @@ app.post('/sms', function (req, res) {
     res.send({ err: err, response: TW_MES })
   });
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// // THE CAPTURE VERIFICATION PART
-// captchaUrl = 'https://www.google.com/recaptcha/api/siteverify?secret=6LeWCCETAAAAAGtTk0MKqtHyPEyNZtfRpqND-uV1&response='
-// app.post('/', function (req, res) {
-//   checkCaptcha(req.body.captchaResponse, function (response) {
-//     if (response.success) {
-//       res.send('WOOT! you are not a robot')
-//     } else {
-//       res.send('BAD! you are a robot')
-//     }
-//   })
-// })
-// var checkCaptcha = function (captchaResponse, cb) {
-//   request.get(captchaUrl + captchaResponse, function (err, response, body) {
-//     if (err) {
-//       console.log('error: ', err)
-//     } else {
-//       return cb(JSON.parse(body))
-//     }
-//   })
-// }
-// //END OF RECAPTURE
-
