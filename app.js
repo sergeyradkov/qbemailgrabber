@@ -22,16 +22,6 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser('brad'))
 app.use(session({ resave: false, saveUninitialized: false, secret: 'smith' }))
 
-// JS DATA DB
-
-var db = new JSData.DS();
-var adapter = new DSNedbAdapter();
-db.registerAdapter('nedb', adapter, { default: true });
-
-
-
-
-
 // GENERIC KEYS
 config.load('./dots/qbconfig.json');
 var consumerKey = config.get('consumerKey'),
@@ -44,9 +34,7 @@ var ACCOUNT_SID = config.get('AccountSid'),
   AUTH_TOKEN = config.get('authToken'),
   TW_PHONE = config.get('twilioPhone');
 
-
-
-
+// QUICKBOOKS PART
 function QBO(req, res, consumerKey, consumerSecret) {
   var postBody = {
     url: QuickBooks.REQUEST_TOKEN_URL,
@@ -89,24 +77,16 @@ app.get('/callback', function (req, res) {
       postBody.oauth.realmId,
       true, // use the Sandbox
       true) // turn debugging on
-
-    // // test out account access
-    // qbo.findAccounts(function (_, accounts) {
-    //   accounts.QueryResponse.Account.forEach(function (account) {
-    //     console.log('QBO is Ready')
-    //   })
-    //   res.redirect('/ready')
-    // })
-
   })
 })
 
+// FIND CUSTOMER BY PHONE
 app.get('/lookup', function (req, res) {
   findCustomerByPhone(req.query.phoneNumber, function (customer) {
     res.send(customer)
   })
 })
-
+// UPDATE CUSTOMER
 app.post('/updated', function (req, res) {
   updateCuctomerByPhone(req.body, function (customer) {
     res.send(200);
@@ -123,11 +103,7 @@ app.get('/ready', function (req, res) {
 })
 
 function updateCuctomerByPhone(customer, callback) {
-
   var qbo = getQbo();
-  // delete customer.captchaResponse
-  // delete customer.captchaUrl
-
   qbo.updateCustomer(customer, function (err, customer) {
     if (err) console.log(err)
     if (callback && typeof callback == 'function') {
@@ -170,8 +146,9 @@ app.post('/sms', function (req, res) {
     res.send({ err: err, response: TW_MES })
   });
 })
-// END OF TWILIO
 
+
+// LISTENING PORT
 app.listen(port, function () {
   console.log('Express server listening on port ' + app.get('port'))
 })
