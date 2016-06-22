@@ -1,17 +1,15 @@
 var http = require('http'),
-  express = require('express'),
-  app = express(),
-  port = process.env.PORT || 8080
-  request = require('request'),
-  bodyParser = require('body-parser'),
-  qs = require('querystring'),
-  util = require('util'),
-  cookieParser = require('cookie-parser'),
-  session = require('express-session'),
-  QuickBooks = require('./index'),
-  JSData = require('js-data'),
-	DSNedbAdapter = require('js-data-nedb'),
-  config = require('config-json');
+    express = require('express'),
+    app = express(),
+    port = process.env.PORT || 8080
+    request = require('request'),
+    bodyParser = require('body-parser'),
+    qs = require('querystring'),
+    util = require('util'),
+    cookieParser = require('cookie-parser'),
+    session = require('express-session'),
+    QuickBooks = require('./index'),
+    config = require('config-json');
 
   // GENERIC EXPRESS CONFIG
 app.use(express.static(__dirname + '/public'))
